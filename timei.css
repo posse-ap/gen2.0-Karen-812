@@ -1,7 +1,12 @@
+h3{
+    text-decoration-line:underline;
+    text-decoration-color: yellow;
+}
+
 li{
     list-style-type:none;
-    border-style: 2px solid ;
-    border-color:gray;
-    background-color: blanchedalmond;
-    margin:10px;
+    border: 1px solid #ebebeb;
+    margin:10px ;
+    padding: 13px;
+    font-weight:600;
 }
