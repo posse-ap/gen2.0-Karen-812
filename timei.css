@@ -1,12 +1,44 @@
+body{
+    width:650px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+ul{
+    width:100%;
+    padding:0 0 0 0;
+}
+
 h3{
     text-decoration-line:underline;
-    text-decoration-color: yellow;
+    text-decoration-color:green;
 }
 
 li{
     list-style-type:none;
     border: 1px solid #ebebeb;
-    margin:10px ;
-    padding: 13px;
+    margin:10px 0px;
+    padding:13px;
     font-weight:600;
 }
+
+div#kaisetsu1{
+    text-decoration-line:underline;
+    text-decoration-color: #287dff;
+    margin:0px;
+    padding:4px;
+}
+
+div#kaisetsu3{
+    text-decoration-line:underline;
+    text-decoration-color:#ff5128;
+    margin:0px;
+    padding:4px;
+}
+
+p{
+    margin:0px;
+    padding:8px;
+}
+
+
