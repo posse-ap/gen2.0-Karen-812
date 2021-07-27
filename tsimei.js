@@ -25,16 +25,17 @@ for (let i = 0; i <= 9; i++) {
         <li></li>
         <li></li>
         </ul>
+        <div><p>つくる、id
     */
     //h2要素作成
     var h2_element = document.createElement('h2');
     h2_element.innerText = i + 1 + '.この地名はなんて読む？';
-    document.getElementById('mondai').appendChild(h2_element);
+    document.getElementById('question').appendChild(h2_element);
     // img要素を作成
     var img_element = document.createElement('img');
     img_element.src = images[i]; // 画像パス
     img_element.alt = 'images[i]'; // 代替テキスト
-    document.getElementById('mondai').appendChild(img_element);
+    document.getElementById('question').appendChild(img_element);
     //ul,li*3
     var ul_element = document.createElement('ul');
     let text0 = document.createElement('li');
@@ -46,11 +47,30 @@ for (let i = 0; i <= 9; i++) {
     let text2 = document.createElement('li');
     text2.innerText = selections[i][2];
     text2.id = 'wrong_sentakushi2'+[i];
-    document.getElementById('mondai').appendChild(text0);
-    document.getElementById('mondai').appendChild(text1);
-    document.getElementById('mondai').appendChild(text2);
-    //divタグ作って入れることができなかったのはなぜ？
+    document.getElementById('question').appendChild(text0);
+    document.getElementById('question').appendChild(text1);
+    document.getElementById('question').appendChild(text2)
 
+    //解説部分
+    const kaisetsu = document.createElement('div');
+        kaisetsu.id='kaisetsu'+[i]
+        document.getElementById('question').appendChild(kaisetsu);
+    const answer1 = document.createElement('p');
+      answer1.id = 'answer1'
+      answer1.innerText = ''
+      document.getElementById('kaisetsu'+[i]).appendChild(answer1);
+    const answer2 = document.createElement('p'); 
+      answer2.id = 'answer2'
+      answer2.innerText = '';
+      document.getElementById('kaisetsu'+[i]).appendChild(answer2);
+    const answer3 = document.createElement('p');
+      answer3.id = 'answer3'
+      answer3.innerText = ''
+      document.getElementById('kaisetsu'+[i]).appendChild(answer3);
+    const answer4 = document.createElement('p'); 
+      answer4.id = 'answer4'
+      answer4.innerText = '';
+      document.getElementById('kaisetsu'+[i]).appendChild(answer4);
 //以下、選択後の処理 
 
 //JSでID作った場合も、読み込みする！！
@@ -63,19 +83,11 @@ let wrong_sentakushi2 = document.getElementById('wrong_sentakushi2'+[i]);
         correct_sentakushi.style.background = '#287dff';
         correct_sentakushi.style.color = 'white';
         //「正解！」を出す
-        const kaisetsu = document.createElement('div');
-        kaisetsu.id='kaisetsu'
-        document.getElementById('mondai').appendChild(kaisetsu);
-
-        const answer1 = document.createElement('p');
+        kaisetsu.style.background = '#f5f5f5';
+        answer1.style.background = '#f5f5f5';
+        answer2.style.background = '#f5f5f5';
         answer1.innerText = '正解！';
-        answer1.id = 'answer1'
-        document.getElementById('kaisetsu').appendChild(answer1);
-        //「正解は～です！」
-        const answer2 = document.createElement('p');
         answer2.innerText = '正解は 「' + selections[i][0] + '」 です！';
-        answer2.id = 'answer2'
-        document.getElementById('kaisetsu').appendChild(answer2);
     };
     wrong_sentakushi.onclick = function () {
         //選択した部分を白字・青背景にする
@@ -86,15 +98,11 @@ let wrong_sentakushi2 = document.getElementById('wrong_sentakushi2'+[i]);
         wrong_sentakushi.style.color = 'white';
 
         //不正解！を出す
-        const answer3 = document.createElement('p');
+        kaisetsu.style.background = '#f5f5f5';
+        answer1.style.background = '#f5f5f5';
+        answer2.style.background = '#f5f5f5';
         answer3.innerText = "不正解！";
-        answer3.id = 'answer3';
-        document.getElementById('kaisetsu').appendChild(answer3);
-        //「正解は～です！」
-        const answer4 = document.createElement('p');
         answer4.innerText = '正解は 「' + selections[i][0] + '」 です！';
-        answer4.id = 'answer4';
-        document.getElementById('kaisetsu').appendChild(answer4);
     };
     wrong_sentakushi2.onclick = function () {
         //選択した部分を白字・青背景にする
@@ -105,14 +113,10 @@ let wrong_sentakushi2 = document.getElementById('wrong_sentakushi2'+[i]);
         wrong_sentakushi2.style.color = 'white';
         
         //不正解！を出す
-        const answer3 = document.createElement('p');
+        kaisetsu.style.background = '#f5f5f5';
+        answer1.style.background = '#f5f5f5';
+        answer2.style.background = '#f5f5f5';
         answer3.innerText = "不正解！";
-        answer3.id = 'answer3';
-        document.getElementById('kaisetsu').appendChild(answer3);
-        //「正解は～です！」
-        const answer4 = document.createElement('p');
         answer4.innerText = '正解は 「' + selections[i][0] + '」 です！';
-        answer4.id = 'answer4';
-        document.getElementById('kaisetsu').appendChild(answer4);
     };
 };
