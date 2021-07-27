@@ -8,8 +8,12 @@ ul{
     width:100%;
     padding:0 0 0 0;
 }
+h1{
+    font-size:larger
+}
 
-h3{
+h2{
+    font-size:large;
     text-decoration-line:underline;
     text-decoration-color:green;
 }
@@ -22,21 +26,51 @@ li{
     font-weight:600;
 }
 
-div#kaisetsu1{
+li#correct_sentakushi:active{
+    background-color:#287dff;
+    color :white;
+}
+
+div#kaisetsu{
+    padding: 17px;
+    background-color: #f5f5f5;
+}
+p#answer1{
+    background-color:  #f5f5f5;
     text-decoration-line:underline;
     text-decoration-color: #287dff;
     margin:0px;
     padding:4px;
+    font-weight:600;
 }
-
-div#kaisetsu3{
+p#answer2{
+    background-color:  #f5f5f5;
+    margin:0px;
+    padding:8px;
+}
+p#answer3{
+    background-color: #f5f5f5;
     text-decoration-line:underline;
     text-decoration-color:#ff5128;
     margin:0px;
     padding:4px;
+    font-weight:600;
 }
-
-p{
+p#answer4{
+    background-color: #f5f5f5;
+    margin:0px;
+    padding:8px;
+}
+p#answer5{
+    background-color: #f5f5f5;
+    text-decoration-line:underline;
+    text-decoration-color:#ff5128;
+    margin:0px;
+    padding:4px;
+    font-weight:600;
+}
+p#answer6{
+    background-color: #f5f5f5;
     margin:0px;
     padding:8px;
 }
