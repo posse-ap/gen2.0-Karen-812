@@ -43,8 +43,6 @@ h2::after {
     box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
 }
 
-/*succeeded*/
-
 .after_click_correct{
     display: block;
     list-style-type: none;
@@ -84,29 +82,31 @@ div.result {
 .description1_visible {
     text-decoration-line: underline;
     text-decoration-color: #287dff;
+    background-color: #f5f5f5;
     line-height: 20px;
     font-weight: 600;
     padding: 3px;
+    margin: 0 0 10px 0;
     font-size: 100%;
     display: block;
-    background-color: #f5f5f5;
 }
 
 .description2_visible {
     text-decoration-line: underline;
     text-decoration-color: #ff5128;
+    background-color: #f5f5f5;
     line-height: 20px;
     font-weight: 600;
     padding: 3px;
+    margin: 0 0 10px 0;
     font-size: 100%;
     display: block;
-    background-color: #f5f5f5;
 }
 
 .description3_visible {
-    margin: 0px;
+    margin: 0;
     font-size: 100%;
-    padding: 0px 0 10px 0;
+    padding: 0;
     display: block;
     /*vertical-align: baseline;*/
     background-color: #f5f5f5;
