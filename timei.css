@@ -43,29 +43,43 @@ h2::after {
     box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
 }
 
-.after_click_correct{
+.correct_after_clicked{
     display: block;
     list-style-type: none;
     border: 1px solid #ebebeb;
     margin: 10px 0px;
     padding: 13px;
     font-weight: 600;
-    cursor: pointer;
     box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
     background-color: #287dff;
     color: white;
+    cursor: default;
+    pointer-events: none;
 }
-.after_click_wrong{
+.wrong_after_clicked{
     display: block;
     list-style-type: none;
     border: 1px solid #ebebeb;
     margin: 10px 0px;
     padding: 13px;
     font-weight: 600;
-    cursor: pointer;
     box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
     background-color: #ff5128;
     color: white;
+    cursor: default;
+    pointer-events: none;
+}
+
+.after_click_other {
+    display: block;
+    list-style-type: none;
+    border: 1px solid #ebebeb;
+    margin: 10px 0px;
+    padding: 13px;
+    font-weight: 600;
+    cursor: default;
+    box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
+    pointer-events: none;
 }
 
 .invisible{

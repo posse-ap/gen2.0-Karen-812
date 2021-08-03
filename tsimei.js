@@ -63,18 +63,48 @@ for (let i = 0; i <= 9; i++) {
   let text0 = document.createElement("li");
   text0.innerText = selections[i][0];
   text0.id = "correct_sentakushi" + [i];
-  text0.className = "before_click"
+  text0.className = "before_click";
   let text1 = document.createElement("li");
   text1.innerText = selections[i][1];
   text1.id = "wrong_sentakushi1" + [i];
-  text1.className = "before_click"
+  text1.className = "before_click";
   let text2 = document.createElement("li");
   text2.innerText = selections[i][2];
   text2.id = "wrong_sentakushi2" + [i];
-  text2.className = "before_click"
-  document.getElementById("question").appendChild(text0);
-  document.getElementById("question").appendChild(text1);
-  document.getElementById("question").appendChild(text2);
+  text2.className = "before_click";
+  // document.getElementById("question").appendChild(text0);
+  // document.getElementById("question").appendChild(text1);
+  // document.getElementById("question").appendChild(text2);
+
+  //選択肢のシャッフル処理
+  array = [text0, text1, text2];
+  newArray = [];
+  let n = array.length;
+  let k = Math.floor(Math.random() * n);
+  let text_k = array[k];
+  console.log(text_k);
+  document.getElementById("question").appendChild(text_k);
+  newArray.push(array[k]); // array のk番目を newArray に追加
+  array.splice(k,1); // array のk番目を削除
+
+  n = array.length;
+  l = Math.floor(Math.random() * n);
+  let text_l = array[l];
+  console.log(text_l);
+  document.getElementById("question").appendChild(text_l);
+  newArray.push(array[l]);
+  array.splice(l,1);
+
+  n = array.length;
+  m = Math.floor(Math.random() * n);
+  let text_m = array[m];
+  console.log(text_m);
+  document.getElementById("question").appendChild(text_m);
+  newArray.push(array[m]);
+  array.splice(m,1);
+
+  array.push(array[k],array[l],array[m]);
+  newArray.splice(0,1,2);
 
   //結果・解説部分
   const result = document.createElement("div");
@@ -107,10 +137,13 @@ for (let i = 0; i <= 9; i++) {
   description3.innerText = "正解は 「" + selections[i][0] + "」 です！";
   document.getElementById("result" + [i]).appendChild(description3);
 
+  // 選択後の処理
   //解説の表示・非表示の切り替え
   correct_sentakushi.onclick = function () {
     //選択した部分を白字・青背景にする
-    correct_sentakushi.className = "after_click_correct"
+    correct_sentakushi.className = "correct_after_clicked";
+    wrong_sentakushi.className = "after_click_other";
+    wrong_sentakushi2.className = "after_click_other";
     //「正解！」を出す
     description1.className = "description1_visible";
     description3.className = "description3_visible";
@@ -120,10 +153,10 @@ for (let i = 0; i <= 9; i++) {
 
   wrong_sentakushi.onclick = function () {
     //正解の選択肢を白字・青背景にする
-    correct_sentakushi.className = "after_click_correct"
+    correct_sentakushi.className = "correct_after_clicked";
     //選択した部分を白字・赤背景にする
-    wrong_sentakushi.className = "after_click_wrong"
-    wrong_sentakushi2.className = "before_click"
+    wrong_sentakushi.className = "wrong_after_clicked";
+    wrong_sentakushi2.className = "after_click_other";
 
     //不正解！を出す
     description2.className = "description2_visible";
@@ -133,11 +166,11 @@ for (let i = 0; i <= 9; i++) {
   };
 
   wrong_sentakushi2.onclick = function () {
-       //正解の選択肢を白字・青背景にする
-    correct_sentakushi.className = "after_click_correct"
+    //正解の選択肢を白字・青背景にする
+    correct_sentakushi.className = "correct_after_clicked";
     //選択した部分を白字・赤背景にする
-    wrong_sentakushi2.className = "after_click_wrong"
-    wrong_sentakushi.className = "before_click"
+    wrong_sentakushi2.className = "wrong_after_clicked";
+    wrong_sentakushi.className = "after_click_other";
 
     //不正解！を出す
     description2.className = "description2_visible";
