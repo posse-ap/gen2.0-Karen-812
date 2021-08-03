@@ -1,18 +1,18 @@
 //問題文
 
 //選択肢の配列
-var takanawa_selection = ["たかなわ", "たかわ", "こうわ"];
-var kameido_selection = ["かめいど", "かめど", "かめと"];
-var koujimachi_selection = ["こうじまち", "かゆまち", "おかとまち"];
-var onarimon_selection = ["おなりもん", "ごせいもん", "おかどもん"];
-var todoroki_selection = ["とどろき", "たたら", "たたりき"];
-var syakujii_selection = ["しゃくじい", "せきこうい", "いじい"];
-var zoshiki_selection = ["ぞうしき", "ざっしき", "ざっしょく"];
-var okachimachi_selection = ["おかちまち", "ごしろちょう", "みとちょう"];
-var shishibone_selection = ["ししぼね", "ろっこつ", "しこね"];
-var kogure_selection = ["こぐれ", "こばく", "こしゃく"];
+let takanawa_selection = ["たかなわ", "たかわ", "こうわ"];
+let kameido_selection = ["かめいど", "かめど", "かめと"];
+let koujimachi_selection = ["こうじまち", "かゆまち", "おかとまち"];
+let onarimon_selection = ["おなりもん", "ごせいもん", "おかどもん"];
+let todoroki_selection = ["とどろき", "たたら", "たたりき"];
+let syakujii_selection = ["しゃくじい", "せきこうい", "いじい"];
+let zoshiki_selection = ["ぞうしき", "ざっしき", "ざっしょく"];
+let okachimachi_selection = ["おかちまち", "ごしろちょう", "みとちょう"];
+let shishibone_selection = ["ししぼね", "ろっこつ", "しこね"];
+let kogure_selection = ["こぐれ", "こばく", "こしゃく"];
 
-var selections = [
+let selections = [
   takanawa_selection,
   kameido_selection,
   koujimachi_selection,
@@ -24,7 +24,7 @@ var selections = [
   shishibone_selection,
   kogure_selection,
 ];
-var images = [
+let images = [
   "https://d1khcm40x1j0f.cloudfront.net/quiz/34d20397a2a506fe2c1ee636dc011a07.png",
   "https://d1khcm40x1j0f.cloudfront.net/quiz/512b8146e7661821c45dbb8fefedf731.png",
   "https://d1khcm40x1j0f.cloudfront.net/quiz/ad4f8badd896f1a9b527c530ebf8ac7f.png",
@@ -50,13 +50,13 @@ for (let i = 0; i <= 9; i++) {
     */
 
   //h2要素(問題文)作成
-  var h2_element = document.createElement("h2");
+  let h2_element = document.createElement("h2");
   h2_element.innerText = i + 1 + ".この地名はなんて読む？";
   document.getElementById("question").appendChild(h2_element);
   // img要素を作成
-  var img_element = document.createElement("img");
+  let img_element = document.createElement("img");
   img_element.src = images[i]; // 画像パス
-  img_element.alt = "images[i]"; // 代替テキスト
+  img_element.alt = "images"+[i]; // 代替テキスト
   document.getElementById("question").appendChild(img_element);
   //ul,li*3(選択肢)
   let ul_element = document.createElement("ul");
@@ -72,11 +72,9 @@ for (let i = 0; i <= 9; i++) {
   text2.innerText = selections[i][2];
   text2.id = "wrong_sentakushi2" + [i];
   text2.className = "before_click";
-  // document.getElementById("question").appendChild(text0);
-  // document.getElementById("question").appendChild(text1);
-  // document.getElementById("question").appendChild(text2);
 
   //選択肢のシャッフル処理
+  //appendChildする順番をランダムに
   array = [text0, text1, text2];
   newArray = [];
   let n = array.length;
