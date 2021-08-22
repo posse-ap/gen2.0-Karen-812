@@ -60,12 +60,12 @@ for (let i = 0; i <= 9; i++) {
   //h2要素(問題文)作成
   let h2_element = document.createElement("h2");
   h2_element.innerText = i + 1 + ".この地名はなんて読む？";
-  document.getElementById("section" +[i]).appendChild(h2_element);
+  document.getElementById("section" + [i]).appendChild(h2_element);
   // img要素を作成
   let img_element = document.createElement("img");
   img_element.src = images[i]; // 画像パス
-  img_element.alt = "images"+[i]; // 代替テキスト
-  document.getElementById("section"+[i]).appendChild(img_element);
+  img_element.alt = "images" + [i]; // 代替テキスト
+  document.getElementById("section" + [i]).appendChild(img_element);
   //ul,li*3(選択肢)
   let ul_element = document.createElement("ul");
   let text0 = document.createElement("li");
@@ -88,33 +88,33 @@ for (let i = 0; i <= 9; i++) {
   let n = array.length;
   let k = Math.floor(Math.random() * n);
   let text_k = array[k];
-  document.getElementById("section"+[i]).appendChild(text_k);
+  document.getElementById("section" + [i]).appendChild(text_k);
   newArray.push(array[k]); // array のk番目を newArray に追加
-  array.splice(k,1); // array のk番目から一つの要素を削除
+  array.splice(k, 1); // array のk番目から一つの要素を削除
 
   n = array.length;
   l = Math.floor(Math.random() * n);
   let text_l = array[l];
-  document.getElementById("section"+[i]).appendChild(text_l);
+  document.getElementById("section" + [i]).appendChild(text_l);
   newArray.push(array[l]);
-  array.splice(l,1);
+  array.splice(l, 1);
 
   n = array.length;
   m = Math.floor(Math.random() * n);
   let text_m = array[m];
-  document.getElementById("section"+[i]).appendChild(text_m);
+  document.getElementById("section" + [i]).appendChild(text_m);
   newArray.push(array[m]);
-  array.splice(m,1);
+  array.splice(m, 1);
 
-  array.push(array[k],array[l],array[m]); //最初の状態に戻す
-  newArray.splice(0,1,2);
-  
+  array.push(array[k], array[l], array[m]); //最初の状態に戻す
+  newArray.splice(0, 1, 2);
+
   //結果・解答部分の作成
   const result = document.createElement("div");
   result.id = "result" + [i];
   result.className = "invisible"; //はじめは非表示
-  document.getElementById("section"+[i]).appendChild(result);
-  
+  document.getElementById("section" + [i]).appendChild(result);
+
   //「正解！」
   const description1 = document.createElement("p");
   description1.id = "description1";
@@ -133,7 +133,7 @@ for (let i = 0; i <= 9; i++) {
   description3.className = "invisible";
   description3.innerText = "正解は 「" + selections[i][0] + "」 です！";
   document.getElementById("result" + [i]).appendChild(description3);
-  
+
   // 選択後の処理
   let correct_sentakushi = document.getElementById("correct_sentakushi" + [i]);
   let wrong_sentakushi = document.getElementById("wrong_sentakushi1_" + [i]);
