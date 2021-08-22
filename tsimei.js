@@ -1,4 +1,4 @@
-//問題文
+//HTMLの<div id="question"></div>部分の中身を作成
 
 //選択肢の配列
 let takanawa_selection = ["たかなわ", "たかわ", "こうわ"];
@@ -24,6 +24,8 @@ let selections = [
   shishibone_selection,
   kogure_selection,
 ];
+
+//画像の配列
 let images = [
   "https://d1khcm40x1j0f.cloudfront.net/quiz/34d20397a2a506fe2c1ee636dc011a07.png",
   "https://d1khcm40x1j0f.cloudfront.net/quiz/512b8146e7661821c45dbb8fefedf731.png",
@@ -38,7 +40,8 @@ let images = [
 ];
 
 for (let i = 0; i <= 9; i++) {
-  /* 
+  /* 一問ごとの構造
+        <div>一問ごとの区切り
         <h2> X.この地名はなんて読む？</h2>
         <img src=""  alt="">
         <ul>
@@ -46,18 +49,23 @@ for (let i = 0; i <= 9; i++) {
         <li></li>
         <li></li>
         </ul>
-        <div><p>
-    */
+        <div>
+  */
 
+  //div要素作成
+  let division = document.createElement("div");
+  division.id = "section" + [i];
+  division.className = "section";
+  document.getElementById("question").appendChild(division);
   //h2要素(問題文)作成
   let h2_element = document.createElement("h2");
   h2_element.innerText = i + 1 + ".この地名はなんて読む？";
-  document.getElementById("question").appendChild(h2_element);
+  document.getElementById("section" +[i]).appendChild(h2_element);
   // img要素を作成
   let img_element = document.createElement("img");
   img_element.src = images[i]; // 画像パス
   img_element.alt = "images"+[i]; // 代替テキスト
-  document.getElementById("question").appendChild(img_element);
+  document.getElementById("section"+[i]).appendChild(img_element);
   //ul,li*3(選択肢)
   let ul_element = document.createElement("ul");
   let text0 = document.createElement("li");
@@ -66,11 +74,11 @@ for (let i = 0; i <= 9; i++) {
   text0.className = "before_click";
   let text1 = document.createElement("li");
   text1.innerText = selections[i][1];
-  text1.id = "wrong_sentakushi1" + [i];
+  text1.id = "wrong_sentakushi1_" + [i];
   text1.className = "before_click";
   let text2 = document.createElement("li");
   text2.innerText = selections[i][2];
-  text2.id = "wrong_sentakushi2" + [i];
+  text2.id = "wrong_sentakushi2_" + [i];
   text2.className = "before_click";
 
   //選択肢のシャッフル処理
@@ -80,42 +88,33 @@ for (let i = 0; i <= 9; i++) {
   let n = array.length;
   let k = Math.floor(Math.random() * n);
   let text_k = array[k];
-  console.log(text_k);
-  document.getElementById("question").appendChild(text_k);
+  document.getElementById("section"+[i]).appendChild(text_k);
   newArray.push(array[k]); // array のk番目を newArray に追加
-  array.splice(k,1); // array のk番目を削除
+  array.splice(k,1); // array のk番目から一つの要素を削除
 
   n = array.length;
   l = Math.floor(Math.random() * n);
   let text_l = array[l];
-  console.log(text_l);
-  document.getElementById("question").appendChild(text_l);
+  document.getElementById("section"+[i]).appendChild(text_l);
   newArray.push(array[l]);
   array.splice(l,1);
 
   n = array.length;
   m = Math.floor(Math.random() * n);
   let text_m = array[m];
-  console.log(text_m);
-  document.getElementById("question").appendChild(text_m);
+  document.getElementById("section"+[i]).appendChild(text_m);
   newArray.push(array[m]);
   array.splice(m,1);
 
-  array.push(array[k],array[l],array[m]);
+  array.push(array[k],array[l],array[m]); //最初の状態に戻す
   newArray.splice(0,1,2);
-
-  //結果・解説部分
+  
+  //結果・解答部分の作成
   const result = document.createElement("div");
   result.id = "result" + [i];
   result.className = "invisible"; //はじめは非表示
-  document.getElementById("question").appendChild(result);
-
-  //JSでID作った場合も、読み込みする！！
-  let correct_sentakushi = document.getElementById("correct_sentakushi" + [i]);
-  let wrong_sentakushi = document.getElementById("wrong_sentakushi1" + [i]);
-  let wrong_sentakushi2 = document.getElementById("wrong_sentakushi2" + [i]);
-
-  //解説部分作成
+  document.getElementById("section"+[i]).appendChild(result);
+  
   //「正解！」
   const description1 = document.createElement("p");
   description1.id = "description1";
@@ -134,15 +133,18 @@ for (let i = 0; i <= 9; i++) {
   description3.className = "invisible";
   description3.innerText = "正解は 「" + selections[i][0] + "」 です！";
   document.getElementById("result" + [i]).appendChild(description3);
-
+  
   // 選択後の処理
-  //解説の表示・非表示の切り替え
+  let correct_sentakushi = document.getElementById("correct_sentakushi" + [i]);
+  let wrong_sentakushi = document.getElementById("wrong_sentakushi1_" + [i]);
+  let wrong_sentakushi2 = document.getElementById("wrong_sentakushi2_" + [i]);
+
   correct_sentakushi.onclick = function () {
     //選択した部分を白字・青背景にする
     correct_sentakushi.className = "correct_after_clicked";
     wrong_sentakushi.className = "after_click_other";
     wrong_sentakushi2.className = "after_click_other";
-    //「正解！」を出す
+    //「正解！」と解答を出す
     description1.className = "description1_visible";
     description3.className = "description3_visible";
     description2.className = "invisible";
@@ -156,7 +158,7 @@ for (let i = 0; i <= 9; i++) {
     wrong_sentakushi.className = "wrong_after_clicked";
     wrong_sentakushi2.className = "after_click_other";
 
-    //不正解！を出す
+    //「不正解！」と解答を出す
     description2.className = "description2_visible";
     description3.className = "description3_visible";
     description1.className = "invisible";
@@ -170,7 +172,7 @@ for (let i = 0; i <= 9; i++) {
     wrong_sentakushi2.className = "wrong_after_clicked";
     wrong_sentakushi.className = "after_click_other";
 
-    //不正解！を出す
+    //「不正解！」と解答を出す
     description2.className = "description2_visible";
     description3.className = "description3_visible";
     description1.className = "invisible";
