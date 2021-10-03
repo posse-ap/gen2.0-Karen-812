@@ -84,7 +84,6 @@ body {
     width: 12px;
   }
   
-  
   /* ====================menubar=========================== */
   .menubar{
     color: black;
@@ -177,14 +176,6 @@ body {
   }
   
   .correct_after_clicked {
-    display: block;
-    list-style-type: none;
-    width: 95%;
-    border: 1px solid #ebebeb;
-    margin: 10px 0px;
-    padding: 13px;
-    font-weight: 600;
-    box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
     background-color: #287dff;
     color: white;
     cursor: default;
@@ -192,14 +183,6 @@ body {
   }
   
   .wrong_after_clicked {
-    display: block;
-    list-style-type: none;
-    width: 95%;
-    border: 1px solid #ebebeb;
-    margin: 10px 0px;
-    padding: 13px;
-    font-weight: 600;
-    box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
     background-color: #ff5128;
     color: white;
     cursor: default;
@@ -207,13 +190,6 @@ body {
   }
   
   .after_click_other {
-    display: block;
-    list-style-type: none;
-    width: 95%;
-    border: 1px solid #ebebeb;
-    margin: 10px 0px;
-    padding: 13px;
-    font-weight: 600;
     cursor: default;
     box-shadow: 0 3px 2px -2px rgb(0 0 0/13%);
     pointer-events: none;

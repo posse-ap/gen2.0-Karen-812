@@ -55,7 +55,6 @@ for (let i = 0; i <= 9; i++) {
   document.getElementById("main").insertAdjacentHTML("beforeend", content);
 
   //選択肢のシャッフル処理⇒appendChildする順番をランダムに
-
   let text0 = document.createElement("li");
   text0.innerText = selections[i][0];
   text0.id = "correct_sentakushi" + [i];
@@ -106,9 +105,10 @@ for (let i = 0; i <= 9; i++) {
 
   correct_sentakushi.onclick = function () {
     //選択した部分を白字・青背景にする
-    correct_sentakushi.className = "correct_after_clicked";
-    wrong_sentakushi.className = "after_click_other";
-    wrong_sentakushi2.className = "after_click_other";
+    correct_sentakushi.classList.add("correct_after_clicked");
+    //その他をクリックできなくする
+    wrong_sentakushi.classList.add( "after_click_other");
+    wrong_sentakushi2.classList.add( "after_click_other");
     //「正解！」と解答を出す
     description1.className = "description1_visible";
     description3.className = "description3_visible";
@@ -118,10 +118,11 @@ for (let i = 0; i <= 9; i++) {
 
   wrong_sentakushi.onclick = function () {
     //正解の選択肢を白字・青背景にする
-    correct_sentakushi.className = "correct_after_clicked";
+    correct_sentakushi.classList.add("correct_after_clicked");
     //選択した部分を白字・赤背景にする
-    wrong_sentakushi.className = "wrong_after_clicked";
-    wrong_sentakushi2.className = "after_click_other";
+    wrong_sentakushi.classList.add("wrong_after_clicked");
+    //その他をクリックできなくする
+    wrong_sentakushi2.classList.add( "after_click_other");;
 
     //「不正解！」と解答を出す
     description2.className = "description2_visible";
@@ -132,10 +133,11 @@ for (let i = 0; i <= 9; i++) {
 
   wrong_sentakushi2.onclick = function () {
     //正解の選択肢を白字・青背景にする
-    correct_sentakushi.className = "correct_after_clicked";
+    correct_sentakushi.classList.add("correct_after_clicked");
     //選択した部分を白字・赤背景にする
-    wrong_sentakushi2.className = "wrong_after_clicked";
-    wrong_sentakushi.className = "after_click_other";
+    wrong_sentakushi2.classList.add("wrong_after_clicked");
+    //その他をクリックできなくする
+    wrong_sentakushi.classList.add( "after_click_other");;
 
     //「不正解！」と解答を出す
     description2.className = "description2_visible";
