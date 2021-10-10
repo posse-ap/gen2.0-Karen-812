@@ -34,43 +34,79 @@ for (let i = 0; i < 10; i++) {
     `<img src="${images[i]}" alt="">` +
     `<ul id="selection_list${i}"></ul>` +
     `<div>` +
-    `<p></p>` +
-    `<p></p>` +
-    `<p></p>` +
+    `<p id="true"></p>` +
+    `<p id="false"></p>` +
+    `<p id="description"></p>` +
     `</div>` +
     `</div>`;
   document.getElementById("main").insertAdjacentHTML("beforeend", content);
 
+  //選択肢の部分だけシャッフルのためにcreateElementを用いて書いていきます
+
+  let choice0 = document.createElement("li");
+  choice0.className = "selection";
+  choice0.id = "selection_" + [i] + "_1";
+  choice0.innerText = selections[i][0];
   let choice1 = document.createElement("li");
   choice1.className = "selection";
-  choice1.id = "selection_" + [i] + "_1";
-  choice1.innerText = selections[i][0];
+  choice1.id = "selection_" + [i] + "_2";
+  choice1.innerText = selections[i][1];
   let choice2 = document.createElement("li");
   choice2.className = "selection";
-  choice2.id = "selection_" + [i] + "_2";
-  choice2.innerText = selections[i][1];
-  let choice3 = document.createElement("li");
-  choice3.className = "selection";
-  choice3.id = "selection_" + [i] + "_3";
-  choice3.innerText = selections[i][2];
+  choice2.id = "selection_" + [i] + "_3";
+  choice2.innerText = selections[i][2];
 
-  document.getElementById("selection_list" + i).appendChild(choice1);
-  document.getElementById("selection_list" + i).appendChild(choice2);
-  document.getElementById("selection_list" + i).appendChild(choice3);
+  // シャッフル appendChildする順番
+  let array = [choice0, choice1, choice2];
+  let shuffle_array = [];
 
-  let get_id_choice1 = document.getElementById("selection_" + [i] + "_1");
-  let get_id_choice2 = document.getElementById("selection_" + [i] + "_2");
-  let get_id_choice3 = document.getElementById("selection_" + [i] + "_3");
+  let r0 = Math.floor(Math.random() * array.length);
+  shuffle_array.push(array[r0]);
+  array.splice(r0, 1);
 
-  get_id_choice1.onclick = function () {
-    console.log("aaa");
+  let r1 = Math.floor(Math.random() * array.length);
+  shuffle_array.push(array[r1]);
+  array.splice(r1, 1);
+
+  shuffle_array.push(array[0]);
+  array.splice(0, 1);
+
+  console.log(shuffle_array);
+
+  document.getElementById("selection_list" + i).appendChild(shuffle_array[0]);
+  document.getElementById("selection_list" + i).appendChild(shuffle_array[1]);
+  document.getElementById("selection_list" + i).appendChild(shuffle_array[2]);
+
+  // 選択されたときの処理
+
+  let get_id_choice0 = document.getElementById("selection_" + [i] + "_1");
+  let get_id_choice1 = document.getElementById("selection_" + [i] + "_2");
+  let get_id_choice2 = document.getElementById("selection_" + [i] + "_3");
+  let get_id_true = document.getElementById("true");
+  let get_id_false = document.getElementById("false");
+  let get_id_description = document.getElementById("description");
+
+  get_id_choice0.onclick = function () {
+    get_id_choice0.className = turn_blue;
+    get_id_choice1.className = after_clicked;
+    get_id_choice2.className = after_clicked;
+    get_id_true.className = result_true;
+    get_id_description.className = result;
   };
 
   get_id_choice1.onclick = function () {
-    console.log("aaa");
+    get_id_choice0.className = turn_blue;
+    get_id_choice1.className = turn_red;
+    get_id_choice2.className = after_clicked;
+    get_id_false.className = result_false;
+    get_id_description.className = result;
   };
-  
-  get_id_choice1.onclick = function () {
-    console.log("aaa");
+
+  get_id_choice2.onclick = function () {
+    get_id_choice0.className = turn_blue;
+    get_id_choice1.className = after_clicked;
+    get_id_choice2.className = turn_red;
+    get_id_false.className = result_false;
+    get_id_description.className = result;
   };
 }
