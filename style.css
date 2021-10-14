@@ -1,19 +1,24 @@
 header{
     display: flex;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .container{
     display: flex;
 }
 
-.left{
+.first_section{
     width: 50%;
     display: flex;
+    gap: 20px;
 }
 
-.right{
+.second_section{
     width: 50%;
     display: flex;
+    gap: 20px;
 }
 
 .card{
