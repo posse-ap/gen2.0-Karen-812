@@ -1,28 +1,87 @@
-header{
+.header{
     display: flex;
     height: 64px;
-    justify-content: space-between;
     align-items: center;
 }
 
+.header_button{
+    margin-left: auto;
+    color: white;
+    background-color: #1278C1;
+    border-radius: 20px;
+    height: 40%;
+    padding: 0.5em 3em;
+    text-align: center;
+}
+
+.header_button p{
+    margin: 0;
+}
+
+.header img{
+    height: 50px;
+}
+
+/* ===============内部=============== */
+
 .container{
     display: flex;
+    padding: 20px 60px;
+    gap: 20px;
+    background-color: #f5f5f5;
 }
 
 .first_section{
     width: 50%;
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .second_section{
     width: 50%;
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+}
+
+.second_section div{
+    width: 35%;
 }
 
 .card{
+    background-color: white;
     border: #f5f5f5 1px solid;
     border-radius: 10px;
-    padding: 10%;
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    width: 20%;
+}
+
+.period{
+    color: blue;
+    font-weight: 700;
+    
+}
+.unit{
+    color: lightgray;
+    margin: 0;
+}
+.number{
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+    margin: 0;
+}
+.graph{
+    width: 80%;
+}
+.title{
+    font-weight: 700; 
+    text-align: left;
+}
+
+.hello{
+    color: tomato;
 }
