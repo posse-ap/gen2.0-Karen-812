@@ -91,6 +91,64 @@
     text-align: left;
 }
 
+/* ===============モーダル=============== */
+#modal-content{
+	width:900px;
+	margin:0;
+	padding:20px 56px; /*  上下分からん！ */
+    gap: 40px;
+	background:#fff;
+	z-index:2;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+}
+
+#modal-content p{
+    margin: 0;
+}
+
+.modal_closed{
+    display: none;
+}
+.modal_open{
+    display: block;
+    position: fixed;
+    top: 20%;
+    left: 10%;
+}
+
+.modal_first{
+    width: 50%;
+}
+.modal_second{
+    width: 50%;
+}
+
+.inside{
+    width: 100%;
+    font-weight: 700;
+}
+.input_box{
+    background-color: #F5F4F9;
+    border: none;
+    width: 100%;
+}
+
+input[type=text]{
+    /* apperance: none; */
+    /* height: 100px; */
+    padding: 0;
+    line-height: 28px;
+}
+
+.comment{
+    height: 180px;
+    padding: 0;
+    line-height: 28px;
+}
+
+
 /* ===============フッター=============== */
 
 .blue{

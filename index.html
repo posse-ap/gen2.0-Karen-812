@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="style.css">
     <title>POSSE app</title>
 </head>
@@ -48,11 +50,61 @@
         </section>
     </div>
 
+    <div id="modal-content" class="modal_open">
+        <section class="modal_first">
+            <div class="study_day inside">
+                <p>学習日</p>
+                <input type="text" class="input_box">
+            </div>
+            <div class="study_contents inside">
+                <p>学習コンテンツ(複数選択可)</p>
+                <label>
+                    <input type="checkbox">N予備校
+                </label>
+                <label>
+                    <input type="checkbox">ドットインストール
+                </label>
+                <label>
+                    <input type="checkbox">POSSE課題
+                </label>
+            </div>
+            <div class="study_languages inside">
+                <p>学習言語(複数選択可)</p>
+                <label><input type="checkbox">HTML</label>
+                <label><input type="checkbox">CSS</label>
+                <label><input type="checkbox">JavaScript</label>
+                <label><input type="checkbox">PHP</label>
+                <label><input type="checkbox">Laravel</label>
+                <label><input type="checkbox">SQL</label>
+                <label><input type="checkbox">SHELL</label>
+                <label><input type="checkbox">情報システム基礎知識(その他)</label>
+            </div>
+        </section>
+        <section class="modal_second">
+            <div class="study_hour inside">
+                <p>学習時間</p>
+                <input type="text" class="input_box">
+            </div>
+            <div class="twitter_comment inside">
+                <p>Twitter用コメント</p>
+                <!-- <textarea rows="10" cols="60">ここに記入してください</textarea> -->
+                <input type="text" class="input_box comment" >
+            </div>
+            <div class="twitter inside">
+                <input type="checkbox">Twitterに自動投稿する
+            </div>
+        </section>
+
+        <!-- <p><a id="modal-close" class="button-link">閉じる</a></p> -->
+    </div>
+
     <footer class="footer">
         <i class="fas fa-chevron-left blue"></i>
         <p>2020年 10月</p>
         <i class="fas fa-chevron-right blue"></i>
     </footer>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </html>
