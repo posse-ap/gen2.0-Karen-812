@@ -9,6 +9,7 @@
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <title>POSSE app</title>
 </head>
 
@@ -18,7 +19,7 @@
             <img src="posse_logo.jpg" alt="POSSE">
         </h1>
         <p class="unit">4th week</p>
-        <div class="header_button">
+        <div id="header_button" class="button" onclick="open_modal()">
             <p>記録・投稿</p>
         </div>
     </header>
@@ -50,49 +51,64 @@
         </section>
     </div>
 
-    <div id="modal-content" class="modal_open">
-        <section class="modal_first">
-            <div class="study_day inside">
-                <p>学習日</p>
-                <input type="text" class="input_box">
-            </div>
-            <div class="study_contents inside">
-                <p>学習コンテンツ(複数選択可)</p>
-                <label>
-                    <input type="checkbox">N予備校
-                </label>
-                <label>
-                    <input type="checkbox">ドットインストール
-                </label>
-                <label>
-                    <input type="checkbox">POSSE課題
-                </label>
-            </div>
-            <div class="study_languages inside">
-                <p>学習言語(複数選択可)</p>
-                <label><input type="checkbox">HTML</label>
-                <label><input type="checkbox">CSS</label>
-                <label><input type="checkbox">JavaScript</label>
-                <label><input type="checkbox">PHP</label>
-                <label><input type="checkbox">Laravel</label>
-                <label><input type="checkbox">SQL</label>
-                <label><input type="checkbox">SHELL</label>
-                <label><input type="checkbox">情報システム基礎知識(その他)</label>
-            </div>
+    <div id="modal_content" class="modal_closed">
+        <div onclick="close_modal()" class="close_button">
+            <i class="fas fa-times grey"></i>
+        </div>
+        <section id="modal_inside">
+            <section class="upper_section">
+                <section class="modal_first">
+                    <div class="study_day inside">
+                        <p>学習日</p>
+                        <input type="text" class="input_box calender" id="calender">
+                    </div>
+                    <div class="study_contents inside">
+                        <p>学習コンテンツ(複数選択可)</p>
+                        <label>
+                            <input type="checkbox">N予備校
+                        </label>
+                        <label>
+                            <input type="checkbox">ドットインストール
+                        </label>
+                        <label>
+                            <input type="checkbox">POSSE課題
+                        </label>
+                    </div>
+                    <div class="study_languages inside">
+                        <p>学習言語(複数選択可)</p>
+                        <label><input type="checkbox">HTML</label>
+                        <label><input type="checkbox">CSS</label>
+                        <label><input type="checkbox">JavaScript</label>
+                        <label><input type="checkbox">PHP</label>
+                        <label><input type="checkbox">Laravel</label>
+                        <label><input type="checkbox">SQL</label>
+                        <label><input type="checkbox">SHELL</label>
+                        <label><input type="checkbox">情報システム基礎知識(その他)</label>
+                    </div>
+                </section>
+                <section class="modal_second">
+                    <div class="study_hour inside">
+                        <p>学習時間</p>
+                        <input type="text" class="input_box">
+                    </div>
+                    <div class="twitter_comment inside">
+                        <p>Twitter用コメント</p>
+                        <input type="text" class="input_box comment">
+                    </div>
+                    <div class="twitter inside">
+                        <input type="checkbox">Twitterに自動投稿する
+                    </div>
+                </section>
+            </section>
+            <section class="under_section">
+                <div class="button modal_button" onclick="post()">記録・投稿</div>
+            </section>
         </section>
-        <section class="modal_second">
-            <div class="study_hour inside">
-                <p>学習時間</p>
-                <input type="text" class="input_box">
-            </div>
-            <div class="twitter_comment inside">
-                <p>Twitter用コメント</p>
-                <!-- <textarea rows="10" cols="60">ここに記入してください</textarea> -->
-                <input type="text" class="input_box comment" >
-            </div>
-            <div class="twitter inside">
-                <input type="checkbox">Twitterに自動投稿する
-            </div>
+        <section class="before_post" id="posted">
+            <p class="green">AWESOME!</p>
+            <i class="fas fa-check-circle green checkmark"></i>
+            <p>記録・投稿</p>
+            <p>完了しました</p>
         </section>
 
         <!-- <p><a id="modal-close" class="button-link">閉じる</a></p> -->
@@ -105,6 +121,6 @@
     </footer>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="main.js"></script>
 
 </html>
