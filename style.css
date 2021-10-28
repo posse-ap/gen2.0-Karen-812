@@ -21,7 +21,6 @@
   color: white;
   background: linear-gradient(to right, #1074be, #3cceff);
   border-radius: 20px;
-  height: 40%;
   padding: 0.5em 3em;
   text-align: center;
 }
@@ -95,6 +94,13 @@
   text-align: left;
 }
 
+/* グラフ */
+.rect{
+  display: block;
+}
+
+
+
 /* ===============モーダル=============== */
 #modal_content {
   width: 75%;
@@ -111,6 +117,7 @@
 
 #modal_content p {
   margin: 0;
+  font-size: 2vw;
 }
 
 .modal_closed {
@@ -224,12 +231,251 @@ input[type="text"] {
   font-weight: 600;
 }
 
-/* ===============レスポンシブ=============== */
+
+
+
+/* =========================レスポンシブ========================= */
+
 @media (max-width: 400px) {
   .container {
-    display: flex;
+    /* display: flex; */
     padding: 20px 20px;
+    gap: 16px;
+    background-color: #f5f5f5;
+  }
+
+  .container section {
+    display: block;
+  }
+
+
+
+
+  /* ===============全体=============== */
+
+  .inner {
+    margin: 0 32px;
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  /* ===============ヘッダー=============== */
+
+  .header {
+    display: flex;
+    height: 64px;
+    align-items: center;
+  }
+
+  .button {
+    margin-left: auto;
+    color: white;
+    background: linear-gradient(to right, #1074be, #3cceff);
+    border-radius: 20px;
+    height: 60%;
+    padding: 0.5em 3em;
+    text-align: center;
+  }
+
+  .button p {
+    margin: 0;
+  }
+
+  .header img {
+    height: 50px;
+  }
+
+  /* ===============内部=============== */
+
+  .container {
+    display: flex;
+    padding: 20px 60px;
     gap: 20px;
     background-color: #f5f5f5;
+  }
+
+  .first_section {
+    width: 50%;
+    display: flex;
+    gap: 0px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .second_section {
+    width: 50%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .second_section div {
+    width: 40%; /* 限界 */
+  }
+
+  .card {
+    background-color: white;
+    border: #f5f5f5 1px solid;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+  }
+
+  .period {
+    color: blue;
+    font-weight: 700;
+    width: 23%; /* 限界 */
+  }
+  .unit {
+    color: lightgray;
+    margin: 0;
+  }
+  .number {
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+    margin: 0;
+  }
+  .graph {
+    width: 100%;
+  }
+  .title {
+    font-weight: 700;
+    text-align: left;
+  }
+
+  /* ===============モーダル=============== */
+  #modal_content {
+    width: 75%;
+    margin: 0 auto;
+    padding: 20px 56px; /*  上下分からん！ */
+    gap: 40px;
+    background: #fff;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 20px;
+    /* display: flex; */
+    /* position: relative; */
+  }
+
+  #modal_content p {
+    margin: 0;
+    font-size: 2vw;
+  }
+
+  .modal_closed {
+    display: none;
+  }
+  .modal_open {
+    display: block;
+    position: fixed;
+    top: 20%;
+    left: 10%;
+  }
+
+  .close_button {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+    width: 3%;
+    margin-left: auto;
+    color: black;
+  }
+
+  .grey {
+    background-color: #f5f4f9;
+  }
+
+  .modal_first {
+    width: 50%;
+  }
+  .modal_second {
+    width: 50%;
+  }
+
+  .inside {
+    width: 100%;
+    font-weight: 700;
+  }
+  .input_box {
+    background-color: #f5f4f9;
+    border: none;
+    width: 100%;
+  }
+
+  input[type="text"] {
+    /* apperance: none; */
+    /* height: 100px; */
+    padding: 0;
+    line-height: 28px;
+    border-radius: 10px;
+  }
+
+  .comment {
+    height: 180px;
+    padding: 0;
+    line-height: 28px;
+  }
+
+  .upper_section {
+    display: flex;
+    gap: 40px;
+  }
+
+  .under_section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .modal_button {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .green {
+    color: #cbdf82;
+  }
+
+  .checkmark {
+    font-size: 3.5em;
+  }
+
+  .before_post {
+    display: none;
+  }
+
+  .after_post {
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+  /* ===============フッター=============== */
+
+  .blue {
+    color: blue;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+  }
+
+  .footer p {
+    margin: 0 1.5rem;
+    font-weight: 600;
   }
 }
