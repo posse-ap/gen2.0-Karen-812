@@ -18,43 +18,79 @@ function post() {
   document.getElementById("modal_inside").className = "hidden";
 }
 
-
 // 棒グラフ
-google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.load("current", { packages: ["corechart", "bar"] });
 google.charts.setOnLoadCallback(drawBasic);
 
 function drawBasic() {
-      
-      var data = new google.visualization.DataTable();
-      data.addColumn('timeofday', '');
-      data.addColumn('number', '');
 
-      data.addRows([
-        [{v: [8, 0, 0], f: '8 am'}, 1],
-        []
-      ]);
+  var data = new google.visualization.DataTable();
+  data.addColumn('number', 'Day');
+  data.addColumn('number', 'Time');
 
-      var options = {
-        title: 'Motivation Level Throughout the Day',
-        hAxis: {
-          title: 'Time of Day',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Rating (scale of 1-10)'
-        }
-      };
+  data.addRows([
+    [1, 3],
+    [2, 4],
+    [3, 5],
+    [4, 3],
+    [5, 0],
+    [6, 0],
+    [7, 4],
+    [8, 2],
+    [9, 2],
+    [10, 8],
+    [11, 8],
+    [12, 2],
+    [13, 2],
+    [14, 1],
+    [15, 7],
+    [16, 4],
+    [17, 4],
+    [18, 3],
+    [19, 3],
+    [20, 3],
+    [21, 2],
+    [22, 2],
+    [23, 6],
+    [24, 2],
+    [25, 2],
+    [26, 1],
+    [27, 1],
+    [28, 1],
+    [29, 7],
+    [30, 8],
+    // [{v: [8, 0, 0], f: '8 am'}, 1],
+    // [{v: [9, 0, 0], f: '9 am'}, 2],
+    // [{v: [10, 0, 0], f:'10 am'}, 3],
+    // [{v: [11, 0, 0], f: '11 am'}, 4],
+    // [{v: [12, 0, 0], f: '12 pm'}, 5],
+    // [{v: [13, 0, 0], f: '1 pm'}, 6],
+    // [{v: [14, 0, 0], f: '2 pm'}, 7],
+    // [{v: [15, 0, 0], f: '3 pm'}, 8],
+    // [{v: [16, 0, 0], f: '4 pm'}, 9],
+    // [{v: [17, 0, 0], f: '5 pm'}, 10],
+  ]);
 
-      var chart = new google.visualization.ColumnChart(
-        document.getElementById('columnchart'));
-
-      chart.draw(data, options);
+  var options = {
+    title: '',
+    hAxis: {
+      title: '',
+      format: '',
+      viewWindow: {
+        min: [7, 30, 0],
+        max: [17, 30, 0]
+      }
+    },
+    vAxis: {
+      title: ''
     }
+  };
 
+  var chart = new google.visualization.ColumnChart(
+    document.getElementById('columnchart'));
+
+  chart.draw(data, options);
+}
 
 // ドーナツグラフ 言語
 
@@ -63,7 +99,7 @@ function drawBasic() {
 // 参考：https://uxbear.me/googlechart-color/
 
 google.charts.load("current", { packages: ["corechart"] });
-    // ロード時のコールバックを"drawChart"に指定  
+// ロード時のコールバックを"drawChart"に指定
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -84,12 +120,22 @@ function drawChart() {
     pieHole: 0.4,
     // width: 300,
     // height: 300,
-    colors: ['#0345EC', '#0F71BD', '#20BDDE', '#3CCEFE','#B29EF3', '#6D46EC', '#4A17EF','#3105C0'],
+    colors: [
+      "#0345EC",
+      "#0F71BD",
+      "#20BDDE",
+      "#3CCEFE",
+      "#B29EF3",
+      "#6D46EC",
+      "#4A17EF",
+      "#3105C0",
+    ],
     chartArea: {
       // leave room for y-axis labels
-      width: '98%'
+      // https://stackoverflow.com/questions/41771333/sizing-google-charts-to-fill-div-width-and-height/41771608
+      width: "98%",
     },
-    legend: {position: 'bottom'}
+    legend: { position: "bottom" },
   };
 
   var chart = new google.visualization.PieChart(
@@ -98,8 +144,6 @@ function drawChart() {
   chart.draw(data, options);
 }
 
-
-
 // ドーナツグラフ 学習内容
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(drawChart2);
@@ -107,7 +151,7 @@ function drawChart2() {
   var data = google.visualization.arrayToDataTable([
     ["content", "portion"],
     ["N予備校", 40],
-    [ "ドットインストール", 20],
+    ["ドットインストール", 20],
     ["課題", 40],
   ]);
 
@@ -116,8 +160,8 @@ function drawChart2() {
     pieHole: 0.4,
     // width: 300,
     // height: 300,
-    colors: ['#0345EC', '#0F71BD', '#20BDDE'],
-    legend: {position: 'bottom'}
+    colors: ["#0345EC", "#0F71BD", "#20BDDE"],
+    legend: { position: "bottom" },
   };
 
   var chart = new google.visualization.PieChart(
