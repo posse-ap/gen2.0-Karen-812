@@ -122,6 +122,13 @@
   font-size: 2vw;
 }
 
+.checkbox_outside{
+  display: inline-block;
+  z-index: 10;
+  border-radius: 15px;
+  padding: 0.2em 0.2em;
+}
+
 .modal_closed {
   display: none;
 }
@@ -150,6 +157,10 @@
 }
 .modal_second {
   width: 50%;
+}
+
+.study_contents{
+  /* gap: 2em; */
 }
 
 .inside {
@@ -195,7 +206,34 @@ input[type="text"] {
   color: #cbdf82;
 }
 
-.checkmark {
+.checkbox{
+  display: none;
+  box-sizing: border-box;
+}
+
+.checkmark{
+  position: relative;
+    vertical-align: middle;
+    font-size: 18px;
+    border-radius: 30px;
+    border:none;
+    padding: 10px;
+    margin:5px 0;
+}
+
+.checkbox + .checkmark:before {
+    font-weight: 800;
+    font-family: "Font Awesome 5 Free";
+    content: '\f058';
+    color: #ccc;
+}
+
+.checkbox:checked + .checkmark:before {
+    color: #0467ad;
+}
+
+
+.checkmark2 {
   font-size: 3.5em;
 }
 

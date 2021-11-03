@@ -14,7 +14,7 @@
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+
     <!-- stylesheet -->
     <link rel="stylesheet" href="style.css">
     <title>POSSE app</title>
@@ -55,7 +55,7 @@
                 <p class="unit">hour</p>
             </div>
             <div class="card graph">
-                <div id= "columnchart" style="width: 100%;"></div>
+                <div id="columnchart" style="width: 100%;"></div>
             </div>
         </section>
         <section class="second_section">
@@ -81,27 +81,71 @@
                     </div>
                     <div class="study_contents inside">
                         <p>学習コンテンツ(複数選択可)</p>
-                        <label>
-                            <input type="checkbox">N予備校
-                        </label>
-                        <label>
-                            <input type="checkbox">ドットインストール
-                        </label>
-                        <label>
-                            <input type="checkbox">POSSE課題
-                        </label>
+                        <div class="checkbox_outside grey">
+                            <label>
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                N予備校
+                            </label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label>
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                ドットインストール
+                            </label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label>
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                POSSE課題
+                            </label>
+                        </div>
                     </div>
                     <div class="study_languages inside">
                         <p>学習言語(複数選択可)</p>
-                        <label><input type="checkbox">HTML</label>
-                        <label><input type="checkbox">CSS</label>
-                        <label><input type="checkbox">JavaScript</label>
-                        <label><input type="checkbox">PHP</label>
-                        <label><input type="checkbox">Laravel</label>
-                        <label><input type="checkbox">SQL</label>
-                        <label><input type="checkbox">SHELL</label>
-                        <label><input type="checkbox">情報システム基礎知識(その他)</label>
-                    </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark">
+                                    HTML</span>
+                            </label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                CSS</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                JavaScript</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                PHP</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                Laravel</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                SQL</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                SHELL</label>
+                        </div>
+                        <div class="checkbox_outside grey">
+                            <label><input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                                情報システム基礎知識(その他)</label>
+                        </div>
                 </section>
                 <section class="modal_second">
                     <div class="study_hour inside">
@@ -110,11 +154,12 @@
                     </div>
                     <div class="twitter_comment inside">
                         <p>Twitter用コメント</p>
-                        <input type="text" class="input_box comment">
+                        <!-- <input type="text" class="input_box comment" id="twitter_com"> -->
+                        <textarea name="twitter_com" id="twitter_com" class="input_box comment"></textarea>
                     </div>
                     <div class="twitter inside">
                         <label>
-                            <input type="checkbox">Twitterに自動投稿する
+                            <input type="checkbox" id="tweet">Twitterに自動投稿する
                         </label>
                     </div>
                 </section>
@@ -125,7 +170,7 @@
         </section>
         <section class="before_post" id="posted">
             <p class="green">AWESOME!</p>
-            <i class="fas fa-check-circle green checkmark"></i>
+            <i class="fas fa-check-circle green checkmark2"></i>
             <p>記録・投稿</p>
             <p>完了しました</p>
         </section>
@@ -141,7 +186,9 @@
 
     <script src="main.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 
 </body>
 

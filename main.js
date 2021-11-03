@@ -16,6 +16,7 @@ function post() {
   // document.getElementsByClassName('upper_section').className = 'invisible'
   // document.getElementsByClassName('under_section').className = 'invisible'
   document.getElementById("modal_inside").className = "hidden";
+  tweet();
 }
 
 // 棒グラフ
@@ -23,10 +24,9 @@ google.charts.load("current", { packages: ["corechart", "bar"] });
 google.charts.setOnLoadCallback(drawBasic);
 
 function drawBasic() {
-
   var data = new google.visualization.DataTable();
-  data.addColumn('number', 'Day');
-  data.addColumn('number', 'Time');
+  data.addColumn("number", "Day");
+  data.addColumn("number", "Time");
 
   data.addRows([
     [1, 3],
@@ -72,23 +72,36 @@ function drawBasic() {
   ]);
 
   var options = {
-    title: '',
+    title: "",
+
+    // X軸
     hAxis: {
-      title: '',
-      format: '',
+      title: "",
+      format: "",
       viewWindow: {
         min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
+        max: [17, 30, 0],
+      },
+      gridlines: { color: "none" },
+      ticks:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
     },
+
+    legend: {
+      position: "none",
+    },
+
+    // Y軸
     vAxis: {
-      title: ''
-    }
+      title: '',
+      format: "#.#h",
+      gridlines: { color: "none" },
+      ticks:[0,2,4,6,8]
+    },
   };
-
   var chart = new google.visualization.ColumnChart(
-    document.getElementById('columnchart'));
-
+    document.getElementById("columnchart")
+    );
+    
   chart.draw(data, options);
 }
 
@@ -169,3 +182,18 @@ function drawChart2() {
   );
   chart.draw(data, options);
 }
+
+window.onresize = function () {
+  drawBasic();
+  drawChart();
+  drawChart2();
+};
+
+let tweet_content = document.getElementById('tweet');
+
+function tweet(){
+  let twitter_text = document.getElementById('twitter_com').value
+  if(tweet_content.checked){
+    window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
+  }
+};
