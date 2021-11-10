@@ -22,7 +22,7 @@
     <!-- graph -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- json用 -->
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 
 </head>
 
@@ -39,24 +39,28 @@
 
     <div class="container">
         <section class="first_section">
-            <div class="card period">
-                Today
-                <p class="number">3</p>
-                <p class="unit">hour</p>
-            </div>
-            <div class="card period">
-                Month
-                <p class="number">120</p>
-                <p class="unit">hour</p>
-            </div>
-            <div class="card period">
-                Total
-                <p class="number">1348</p>
-                <p class="unit">hour</p>
-            </div>
-            <div class="card graph">
-                <div id="columnchart" style="width: 100%;"></div>
-            </div>
+            <section class="first_top">
+                <div class="card period">
+                    Today
+                    <p class="number">3</p>
+                    <p class="unit">hour</p>
+                </div>
+                <div class="card period">
+                    Month
+                    <p class="number">120</p>
+                    <p class="unit">hour</p>
+                </div>
+                <div class="card period">
+                    Total
+                    <p class="number">1348</p>
+                    <p class="unit">hour</p>
+                </div>
+            </section>
+            <section class="first_bottom">
+                <div class="card graph">
+                    <div id="columnchart" style="width: 100%;"></div>
+                </div>
+            </section>
         </section>
         <section class="second_section">
             <div class="card title">学習時間
@@ -79,11 +83,11 @@
                         <p>学習日</p>
                         <input type="text" class="input_box calender" id="calender">
                     </div>
-                    <div class="study_contents inside">
+                    <div class="study_contents inside modal_margin">
                         <p>学習コンテンツ(複数選択可)</p>
                         <div class="checkbox_outside grey">
                             <label>
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" class="checkbox" id="checkboxes" onclick="checkcheck()">
                                 <span class="checkmark"></span>
                                 N予備校
                             </label>
@@ -103,7 +107,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="study_languages inside">
+                    <div class="study_languages inside modal_margin">
                         <p>学習言語(複数選択可)</p>
                         <div class="checkbox_outside grey">
                             <label><input type="checkbox" class="checkbox">
@@ -152,14 +156,16 @@
                         <p>学習時間</p>
                         <input type="text" class="input_box">
                     </div>
-                    <div class="twitter_comment inside">
+                    <div class="twitter_comment inside modal_margin">
                         <p>Twitter用コメント</p>
                         <!-- <input type="text" class="input_box comment" id="twitter_com"> -->
                         <textarea name="twitter_com" id="twitter_com" class="input_box comment"></textarea>
                     </div>
-                    <div class="twitter inside">
+                    <div class="twitter inside modal_margin">
                         <label>
-                            <input type="checkbox" id="tweet">Twitterに自動投稿する
+                            <input type="checkbox" id="tweet" class="checkbox">
+                            <span class="checkmark big_check"></span>
+                            Twitterに自動投稿する
                         </label>
                     </div>
                 </section>

@@ -46,10 +46,24 @@
 
 .first_section {
   width: 50%;
+  /* display: flex; */
+  /* gap: 20px; */
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+}
+
+.first_top {
+  display: flex;
+  width: 100%;
   display: flex;
   gap: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.first_bottom {
+  width: 100%;
 }
 
 .second_section {
@@ -97,11 +111,9 @@
 }
 
 /* グラフ */
-.rect{
+.rect {
   display: block;
 }
-
-
 
 /* ===============モーダル=============== */
 #modal_content {
@@ -119,10 +131,10 @@
 
 #modal_content p {
   margin: 0;
-  font-size: 2vw;
+  font-size: 1vw;
 }
 
-.checkbox_outside{
+.checkbox_outside {
   display: inline-block;
   z-index: 10;
   border-radius: 15px;
@@ -159,8 +171,18 @@
   width: 50%;
 }
 
-.study_contents{
+.modal_margin {
+  margin-top: 1em;
+}
+
+.study_contents div {
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
   /* gap: 2em; */
+}
+.study_languages div {
+  margin-right: 0.6em;
+  margin-bottom: 0.5em;
 }
 
 .inside {
@@ -178,6 +200,11 @@ input[type="text"] {
   /* height: 100px; */
   padding: 0;
   line-height: 28px;
+  border-radius: 10px;
+}
+
+textarea {
+  resize: none;
   border-radius: 10px;
 }
 
@@ -206,32 +233,39 @@ input[type="text"] {
   color: #cbdf82;
 }
 
-.checkbox{
+.checkbox {
   display: none;
   box-sizing: border-box;
 }
 
-.checkmark{
+.checkmark {
   position: relative;
-    vertical-align: middle;
-    font-size: 18px;
-    border-radius: 30px;
-    border:none;
-    padding: 10px;
-    margin:5px 0;
+  vertical-align: middle;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.big_check {
+  font-size: 30px;
 }
 
 .checkbox + .checkmark:before {
-    font-weight: 800;
-    font-family: "Font Awesome 5 Free";
-    content: '\f058';
-    color: #ccc;
+  font-weight: 800;
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
+  color: #ccc;
 }
 
 .checkbox:checked + .checkmark:before {
-    color: #0467ad;
+  color: #0467ad;
 }
 
+.checkbox:checked + .checkbox_outside {
+  background-color: #0467ad;
+}
 
 .checkmark2 {
   font-size: 3.5em;
@@ -271,25 +305,19 @@ input[type="text"] {
   font-weight: 600;
 }
 
-
-
-
 /* =========================レスポンシブ========================= */
 
 @media (max-width: 400px) {
   .container {
     /* display: flex; */
-    padding: 20px 20px;
-    gap: 16px;
+    /* padding: 20px 20px;
+    gap: 16px; */
     background-color: #f5f5f5;
   }
 
   .container section {
     display: block;
   }
-
-
-
 
   /* ===============全体=============== */
 
@@ -310,13 +338,14 @@ input[type="text"] {
   }
 
   .button {
-    margin-left: auto;
+    /* margin-left: auto;
     color: white;
     background: linear-gradient(to right, #1074be, #3cceff);
     border-radius: 20px;
     height: 60%;
     padding: 0.5em 3em;
-    text-align: center;
+    text-align: center; */
+    display: none;
   }
 
   .button p {
@@ -330,46 +359,68 @@ input[type="text"] {
   /* ===============内部=============== */
 
   .container {
-    display: flex;
-    padding: 20px 60px;
+    display: block;
+    padding: 5% 5%;
     gap: 20px;
     background-color: #f5f5f5;
   }
 
   .first_section {
-    width: 50%;
-    display: flex;
+    width: 100%;
+    /* display: flex;
     gap: 0px;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+  }
+
+  .first_top {
+    width: 100%;
+    display: flex;
+    /* gap: 20px; */
+    /* justify-content: space-between; */
+    /* flex-wrap: nowrap; */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .first_top div {
+    display: inline-block;
+    width: 23%;
   }
 
   .second_section {
-    width: 50%;
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    width: 100%;
+    display: block;
+    /* gap: 20px; */
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .second_section div {
-    width: 40%; /* 限界 */
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 20px;
+    text-align:left;
   }
 
   .card {
     background-color: white;
     border: #f5f5f5 1px solid;
     border-radius: 10px;
-    padding: 20px;
-    justify-content: center;
-    text-align: center;
-    width: 30%;
+    padding: 10px;
+    margin: 0;
+    display: block;
   }
 
   .period {
     color: blue;
-    font-weight: 700;
-    width: 23%; /* 限界 */
+    font-size: 0.8em;
+    /* font-weight: 700; */
+    width: 20%; /* 限界 */
+    margin: 0;
+    display: block;
   }
   .unit {
     color: lightgray;
@@ -385,8 +436,8 @@ input[type="text"] {
     width: 100%;
   }
   .title {
-    font-weight: 700;
-    text-align: left;
+    /* font-weight: 700; */
+    text-align:left;
   }
 
   /* ===============モーダル=============== */
@@ -405,7 +456,7 @@ input[type="text"] {
 
   #modal_content p {
     margin: 0;
-    font-size: 2vw;
+    font-size: 1vw;
   }
 
   .modal_closed {

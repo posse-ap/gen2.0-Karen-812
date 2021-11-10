@@ -11,6 +11,14 @@ function close_modal() {
   document.getElementById("modal_content").className = "modal_closed";
 }
 
+function checkcheck(){
+  let check_checkbox = document.getElementsById('checkboxes');
+  if(check_checkbox.checked){
+    check_checkbox.parentNode.style.backgroundColor = '#0467ad';
+    console.log('aaa')
+  }
+}
+
 function post() {
   document.getElementById("posted").className = "after_post";
   // document.getElementsByClassName('upper_section').className = 'invisible'
