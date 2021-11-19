@@ -70,19 +70,19 @@
                 <div id="donutchart2" style="width: 100%;"></div>
             </div>
         </section>
-        <section class="for_mobile">
-            <div>
-                <i class="fas fa-chevron-left blue"></i>
-                <p>2020年 10月</p>
-                <i class="fas fa-chevron-right blue"></i>
-            </div>
-        </section>
-        <footer class="footer">
-            <div class="button2" onclick="open_modal()">
-                <p>記録・投稿</p>
-            </div>
-        </footer>
     </div>
+    <section class="for_mobile">
+        <div>
+            <i class="fas fa-chevron-left blue"></i>
+            <p>2020年 10月</p>
+            <i class="fas fa-chevron-right blue"></i>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="button2" onclick="open_modal()">
+            <p>記録・投稿</p>
+        </div>
+    </footer>
 
     <div id="modal_content" class="modal_closed">
         <div onclick="close_modal()" class="close_button">
@@ -123,9 +123,8 @@
                         <p>学習言語(複数選択可)</p>
                         <div class="checkbox_outside grey">
                             <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark">
-                                    HTML</span>
-                            </label>
+                                <span class="checkmark"></span>
+                                HTML</label>
                         </div>
                         <div class="checkbox_outside grey">
                             <label><input type="checkbox" class="checkbox">
@@ -173,7 +172,7 @@
                         <!-- <input type="text" class="input_box comment" id="twitter_com"> -->
                         <textarea name="twitter_com" id="twitter_com" class="input_box comment"></textarea>
                     </div>
-                    <div class="twitter inside modal_margin">
+                    <div class="twitter inside">
                         <label>
                             <input type="checkbox" id="tweet" class="checkbox">
                             <span class="checkmark big_check"></span>
@@ -183,14 +182,14 @@
                 </section>
             </section>
             <section class="under_section">
-                <div class="button modal_button" onclick="post()">記録・投稿</div>
+                <div class="modal_button" onclick="post()">記録・投稿</div>
             </section>
         </section>
         <section class="before_post" id="posted">
             <p class="green">AWESOME!</p>
             <i class="fas fa-check-circle green checkmark2"></i>
-            <p>記録・投稿</p>
-            <p>完了しました</p>
+            <p class="after_posted_message">記録・投稿</p>
+            <p class="after_posted_message">完了しました</p>
         </section>
 
         <!-- <p><a id="modal-close" class="button-link">閉じる</a></p> -->

@@ -1,10 +1,15 @@
 /* https://coliss.com/articles/build-websites/operation/css/css-about-min-max-clamp.html */
 
 /* ===============全体=============== */
-
-.inner {
-  margin: 0 32px;
+body{
+  margin: 0;
+  /* box-sizing: content-box;
+  width: 100%; */
 }
+
+/* .inner {
+  margin: 0 32px;
+} */
 
 .invisible {
   display: none;
@@ -44,9 +49,11 @@
 .container {
   display: flex;
   position: relative;
-  padding: 20px 60px;
   gap: 20px;
   background-color: #f5f5f5;
+  box-sizing: border-box;
+  padding: 20px 60px;
+  width: 100%;
 }
 
 .first_section {
@@ -81,6 +88,11 @@
 
 .second_section div {
   width: 40%; /* 限界 */
+}
+
+.for_mobile{
+  display: block;
+  width: 100%;
 }
 
 .card {
@@ -208,11 +220,6 @@ input[type="text"] {
   border-radius: 10px;
 }
 
-textarea {
-  resize: none;
-  border-radius: 10px;
-}
-
 .comment {
   height: 180px;
   padding: 0;
@@ -230,6 +237,15 @@ textarea {
 }
 
 .modal_button {
+  color: white;
+  background: linear-gradient(to right, #1074be, #3cceff);
+  border-radius: 20px;
+  display:block;
+  width: 60%;
+  padding: 0.5em 3em;
+  text-align: center;
+  margin: 0 auto;
+  /* margin-left: auto; */
   margin-right: auto;
   margin-left: auto;
 }
@@ -299,24 +315,24 @@ textarea {
   color: blue;
 }
 
-.footer {
+.for_mobile {
   display: flex;
   justify-content: center;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 10%;
   align-items: center;
   background-color: #f5f5f5;
   width: 100%;
   height: 5%;
 }
 
-.footer p {
+.for_mobile p {
   margin: 0 1.5rem;
   font-weight: 600;
 }
 
-.footer div{
+.for_mobile div{
   display: flex;
   justify-content: center;
   position: absolute;
@@ -331,6 +347,10 @@ textarea {
     /* padding: 20px 20px;
     gap: 16px; */
     background-color: #f5f5f5;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 0;
   }
 
   .container section {
@@ -375,7 +395,7 @@ textarea {
 
   .container {
     display: block;
-    padding: 5% 5%;
+    padding: 3% 3%;
     gap: 20px;
     background-color: #f5f5f5;
   }
@@ -393,7 +413,7 @@ textarea {
     width: 100%;
     display: flex;
     /* gap: 20px; */
-    /* justify-content: space-between; */
+    justify-content: space-between;
     /* flex-wrap: nowrap; */
     margin-bottom: 20px;
     text-align: center;
@@ -449,6 +469,7 @@ textarea {
     margin: 0;
   }
   .graph {
+    box-sizing: border-box;
     width: 100%;
   }
   .title {
@@ -458,36 +479,44 @@ textarea {
 
   /* ===============モーダル=============== */
   #modal_content {
+    box-sizing: border-box;
     width: 100%;
-    margin: 0 auto;
-    padding: 20px 56px; /*  上下分からん！ */
-    gap: 40px;
+    margin: 0;
+    padding: 30px 15px;
+    /* gap: 40px; */
     background: #fff;
     z-index: 2;
-    border: 1px solid black;
+    border: 0px solid black;
     border-radius: 20px;
     /* display: flex; */
-    /* position: relative; */
   }
 
   #modal_content p {
     margin: 0;
     font-size: 1vw;
   }
-
+  
+  .checkbox_outside {
+    display: inline-block;
+    z-index: 10;
+    border-radius: 15px;
+    padding: 0.2em 0.2em;
+  }
+  
   .modal_closed {
     display: none;
   }
+
   .modal_open {
     display: block;
-    /* position: fixed;
-    top: 20%;
-    left: 10%; */
+    position: fixed;
+    top: 10%;
+    left: 0;
   }
 
   .close_button {
     position: absolute;
-    top: 5%;
+    top: 2%;
     right: 2%;
     width: 3%;
     margin-left: auto;
@@ -499,10 +528,28 @@ textarea {
   }
 
   .modal_first {
-    width: 50%;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
   }
+
+  .modal_first label{
+    font-size: 0.5em;
+  }
+
   .modal_second {
-    width: 50%;
+    display: block;
+    width: 100%;
+  }
+
+  .study_contents div {
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+    /* gap: 2em; */
+  }
+  .study_languages div {
+    margin-right: 0.6em;
+    margin-bottom: 0.5em;
   }
 
   .inside {
@@ -524,22 +571,31 @@ textarea {
   }
 
   .comment {
-    height: 180px;
+    height: 80px;
     padding: 0;
     line-height: 28px;
   }
 
   .upper_section {
-    display: flex;
+    display: block;
     gap: 40px;
   }
 
   .under_section {
-    display: flex;
+    display: block;
     justify-content: center;
   }
 
   .modal_button {
+    color: white;
+    background: linear-gradient(to right, #1074be, #3cceff);
+    border-radius: 20px;
+    display:block;
+    width: 60%;
+    padding: 0.5em 3em;
+    text-align: center;
+    margin: 0 auto;
+    /* margin-left: auto; */
     margin-right: auto;
     margin-left: auto;
   }
@@ -548,7 +604,41 @@ textarea {
     color: #cbdf82;
   }
 
+  .checkbox {
+    display: none;
+    box-sizing: border-box;
+  }
+  
   .checkmark {
+    position: relative;
+    vertical-align: middle;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+  }
+  
+  .big_check {
+    font-size: 25px;
+  }
+  
+  .checkbox + .checkmark:before {
+    font-weight: 800;
+    font-family: "Font Awesome 5 Free";
+    content: "\f058";
+    color: #ccc;
+  }
+  
+  .checkbox:checked + .checkmark:before {
+    color: #0467ad;
+  }
+  
+  .checkbox:checked + .checkbox_outside {
+    background-color: #0467ad;
+  }
+  
+  .checkmark2 {
     font-size: 3.5em;
   }
 
@@ -559,11 +649,20 @@ textarea {
   .after_post {
     position: absolute;
     top: 25%;
-    left: 45%;
+    left: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 1.2em;
   }
+  
+  #posted p{
+    font-size: 1.1em;
+  }
+
+  /* .before_post p{
+    font-size: 5em;
+  } */
 
   .hidden {
     visibility: hidden;
@@ -576,6 +675,8 @@ textarea {
 
   .for_mobile{
     margin-bottom: 40px;
+    position: absolute;
+    bottom: -200px;
   }
 
   .for_mobile p {
@@ -586,16 +687,15 @@ textarea {
   .for_mobile div{
     display: flex;
     justify-content: center;
-    position: absolute;
     width: 100%;
   }
 
   .footer {
     /* display: flex;
-    justify-content: center;
+    justify-content: center; */
     position: absolute;
     left: 0;
-    bottom: 20px; */
+    bottom: -200px; 
     width: 100%;
     align-items: center;
     background-color: #f5f5f5;
@@ -608,10 +708,11 @@ textarea {
     background: linear-gradient(to right, #1074be, #3cceff);
     border-radius: 20px;
     display:block;
-    width: 100%;
+    width: 60%;
     padding: 0.5em 3em;
     text-align: center;
-    margin: 0;
+    margin: 0 auto;
+    /* margin-left: auto; */
   }
   
   .button2 p {
