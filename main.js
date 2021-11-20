@@ -20,11 +20,18 @@ function checkcheck(){
 }
 
 function post() {
-  document.getElementById("posted").className = "after_post";
-  // document.getElementsByClassName('upper_section').className = 'invisible'
-  // document.getElementsByClassName('under_section').className = 'invisible'
-  document.getElementById("modal_inside").className = "hidden";
-  tweet();
+  document.getElementById("posted1").className = "after_post2";
+  setTimeout(function(){
+    document.getElementById("posted").className = "after_post";
+    // document.getElementsByClassName('upper_section').className = 'invisible'
+    // document.getElementsByClassName('under_section').className = 'invisible'
+    document.getElementById("modal_inside").className = "hidden";
+    tweet();
+  }, 3000);
+  setTimeout(function(){
+  document.getElementById("posted1").className = "hidden";
+  }, 3000);
+
 }
 
 // 棒グラフ
