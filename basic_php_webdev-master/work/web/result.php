@@ -10,7 +10,8 @@ require('../app/functions.php');
 // $color = isset($color) ? $color : 'None selected';
 // $color = $color ??'None selected';  //上と同じ意味
 $colorFromGet = filter_input(INPUT_GET, 'color') ?? 'transparent';
-setcookie('color', $colorFromGet);
+// setcookie('color', $colorFromGet);
+$_SESSION['color'] = $colorFromGet;
 
 // $message = trim(filter_input(INPUT_GET, 'message'));
 // $message = $message !== '' ? $message : '...';
