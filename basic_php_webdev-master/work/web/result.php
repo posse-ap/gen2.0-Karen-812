@@ -2,24 +2,11 @@
 
 require('../app/functions.php');
 
-// $colors = filter_input(INPUT_GET, 'colors', FILTER_DEFAULT,FILTER_REQUIRE_ARRAY);
-// $color = filter_input(INPUT_GET, 'color');
-
-// $colors = empty($colors) ? 'None selected' : implode(',', $colors);
-
-// $color = isset($color) ? $color : 'None selected';
-// $color = $color ??'None selected';  //上と同じ意味
-$colorFromGet = filter_input(INPUT_GET, 'color') ?? 'transparent';
-// setcookie('color', $colorFromGet);
-$_SESSION['color'] = $colorFromGet;
-
-// $message = trim(filter_input(INPUT_GET, 'message'));
-// $message = $message !== '' ? $message : '...';
 include('../app/_parts/_header.php');
 
 ?>
 
-<p><?= h($colorFromGet); ?></p>
+<p>Message added!</p>
 <p><a href="index.php">Go back</a></p>
 
 <?php
