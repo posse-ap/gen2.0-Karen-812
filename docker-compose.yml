@@ -16,7 +16,8 @@ services:
     volumes:
       - ./www/html:/var/www/html
     depends_on:
-      - db
+      - mysql
+    image: php:7.4-fpm
 
   # db:
   #   platform: linux/amd64
@@ -37,13 +38,13 @@ services:
     ports:
       - 8888:80
     depends_on:
-      - db
+      - mysql
 
   mysql:
-    platform: linux/amd64
-    # image: mysql
-    image: mysql:5.7
-    # command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    # platform: linux/amd64
+    image: mysql:latest
+    # image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     # volumes::
     #   - ./docker/mysql:/docker-entrypoint-initdb.d   
     environment:
