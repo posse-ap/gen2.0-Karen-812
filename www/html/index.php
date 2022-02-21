@@ -6,7 +6,14 @@ $user = 'karen';
 $password = 'password';
 
 try {
-    $dbh = new PDO($dsn, $user, $password);
+    $dbh = new PDO(
+        $dsn, 
+        $user, 
+        $password,   
+    [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]
+    );
     echo "接続成功\n";
 
     // -------ここから12/27の週分を新しく書いてくよ！------
