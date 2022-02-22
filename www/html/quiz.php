@@ -21,7 +21,7 @@ try {
     ]
     );
 
-    $sql = 'SELECT name FROM big_questions WHERE id = 1';
+    $sql = 'SELECT name FROM big_questions WHERE id = $pgid';
 
     // PDOStatementクラスのインスタンスを生成します。
     $prepare = $dbh->prepare($sql);
@@ -35,7 +35,7 @@ try {
 
     // 東京・広島を取得
     // SELECT文を変数に格納
-    $sql2 = "SELECT * FROM big_questions WHERE id = 1";
+    $sql2 = "SELECT * FROM big_questions WHERE id = $pgid";
     // SQLステートメントを実行し、結果を変数に格納
     $stmt = $dbh->query($sql2);
 
@@ -104,9 +104,8 @@ try {
 
     // foreach文で配列の中身を一行ずつ出力
     foreach ($stmt as $row) {
-
         // データベースのフィールド名で出力
-        echo $row['id'].'：'.$row['name'];
+        echo $row['name'];
         
         // 改行を入れる
         echo '<br>';
