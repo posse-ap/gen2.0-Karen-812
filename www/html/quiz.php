@@ -35,7 +35,7 @@ try {
 
     // 東京・広島を取得
     // SELECT文を変数に格納
-    $sql2 = "SELECT * FROM big_questions";
+    $sql2 = "SELECT * FROM big_questions WHERE id = 1";
     // SQLステートメントを実行し、結果を変数に格納
     $stmt = $dbh->query($sql2);
 
@@ -99,27 +99,23 @@ try {
         </div>
     <!-- <h1>ガチで東京の人しか解けない！ #東京の難読地名クイズ</h1> -->
     <h1>
-        <?php echo $pgid; 
-            echo $result; ?>
-    </h1>
-        
     <!-- // 結果を出力 -->
     <?php
-    print_r($result);
-        // foreach文で配列の中身を一行ずつ出力
-        foreach ($stmt as $row) {
-    
-            // データベースのフィールド名で出力
-            echo $row['id'].'：'.$row['name'].'県/都';
-            
-            // 改行を入れる
-            echo '<br>';
-            }
-    ?>
 
+    // foreach文で配列の中身を一行ずつ出力
+    foreach ($stmt as $row) {
+
+        // データベースのフィールド名で出力
+        echo $row['id'].'：'.$row['name'];
+        
+        // 改行を入れる
+        echo '<br>';
+        }
+    ?>
+    </h1>
     <div id="question"></div>
 </body>
 
-<script src="tsimei.js"></script>
+<script src="main.js"></script>
 
 </html>
