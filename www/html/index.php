@@ -1,39 +1,4 @@
 <?php
-
-// (1) 取得するデータのidを指定
-$id = $_REQUEST['id'];
-
-// (2) データベースに接続
-$pdo = new PDO('mysql:charset=UTF8;dbname=quizy;host=db', 'root', 'root');
-
-// (3) SQL作成
-$stmt = $pdo->prepare("SELECT * FROM choices WHERE id = :id");
-
-// (4) 登録するデータをセット
-$stmt->bindParam( ':id', $id, PDO::PARAM_INT);
-
-// (5) SQL実行
-$res = $stmt->execute();
-
-// (6) 該当するデータを取得
-if( $res ) {
-	$data = $stmt->fetch();
-	// var_dump($data);
-    echo $data['name'];
-
-}
-
-// (7) データベースの接続解除
-$pdo = null;
-
-?>
-
-
-<!-- ________________________________________ -->
-
-
-
-<?php
 // phpinfo();
 
 $dsn = 'mysql:dbname=quizydb;charset=utf8;host=mysql';
@@ -41,21 +6,40 @@ $user = 'karen';
 $password = 'password';
 
 try {
-    $dbh = new PDO($dsn, $user, $password);
+    $dbh = new PDO(
+        $dsn, 
+        $user, 
+        $password,   
+    [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]
+    );
     echo "接続成功\n";
 
+    // -------ここから12/27の週分を新しく書いてくよ！------
 
+    $sql = 'SELECT * FROM big_questions';
+
+    // PDOStatementクラスのインスタンスを生成します。
+    $prepare = $dbh->prepare($sql);
+
+    // プリペアドステートメントを実行する
+    $prepare->execute();
     
+    $result = $prepare->fetchAll();
+    // PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
+    // (PDO::FETCH_ASSOC);
+    
+    // 結果を出力
+    print_r($result);
+
+    Echo "<a href = http://localhost:8080/quiz.php?id=1> 1だよ</a>" . PHP_EOL;
+    Echo "<a href = http://localhost:8080/quiz.php?id=2> 2だよ </a>";
+    // Echo "<a href = $ url> $ site_title </a>";
+
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();
 }
-
-// $dbh = new PDO(
-//     'mysql:host=db;dbname=quizy;charset=utf8mb4',
-//     'naoki',
-//     'karen',
-//     'password'
-// );
 
 ?>
