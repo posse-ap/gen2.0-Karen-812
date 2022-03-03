@@ -1,61 +1,30 @@
 <?php
+// phpinfo();
+require('dbconnect.php');
 
-// (1) 取得するデータのidを指定
-$id = $_REQUEST['id'];
+$sql = 'SELECT * FROM big_questions';
 
-// (2) データベースに接続
-$pdo = new PDO('mysql:charset=UTF8;dbname=quizy;host=db', 'root', 'root');
+// PDOStatementクラスのインスタンスを生成します。
+$prepare = $pdo->prepare($sql);
 
-// (3) SQL作成
-$stmt = $pdo->prepare("SELECT * FROM choices WHERE id = :id");
+// プリペアドステートメントを実行する
+$prepare->execute();
 
-// (4) 登録するデータをセット
-$stmt->bindParam( ':id', $id, PDO::PARAM_INT);
+$results = $prepare->fetchAll();
+// PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
+// (PDO::FETCH_ASSOC);
 
-// (5) SQL実行
-$res = $stmt->execute();
-
-// (6) 該当するデータを取得
-if( $res ) {
-	$data = $stmt->fetch();
-	// var_dump($data);
-    echo $data['name'];
-
-}
-
-// (7) データベースの接続解除
-$pdo = null;
-
+// 結果を出力
+// print_r($results);
+$stmt = $pdo->query('SELECT * FROM big_questions');
 ?>
 
-
-<!-- ________________________________________ -->
-
-
+<?php foreach ($results as $result) : ?>
+    <p>
+        <a href="/quiz.php?id=<?php echo $result['id']; ?>"><?php echo $result['id'] . '：' . $result['name']; ?></a>
+    </p>
+<?php endforeach; ?>
 
 <?php
-// phpinfo();
-
-$dsn = 'mysql:dbname=quizydb;charset=utf8;host=mysql';
-$user = 'karen';
-$password = 'password';
-
-try {
-    $dbh = new PDO($dsn, $user, $password);
-    echo "接続成功\n";
-
-
-    
-} catch (PDOException $e) {
-    echo "接続失敗: " . $e->getMessage() . "\n";
-    exit();
-}
-
-// $dbh = new PDO(
-//     'mysql:host=db;dbname=quizy;charset=utf8mb4',
-//     'naoki',
-//     'karen',
-//     'password'
-// );
-
-?>
+// Echo "<a href=http://localhost:8080/quiz.php?id=1> 1だよ</a>" . PHP_EOL;
+// Echo "<a href=http://localhost:8080/quiz.php?id=2> 2だよ </a>";
