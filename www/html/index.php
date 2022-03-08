@@ -4,19 +4,17 @@ require('dbconnect.php');
 
 $sql = 'SELECT * FROM big_questions';
 
-// PDOStatementクラスのインスタンスを生成します。
-$prepare = $pdo->prepare($sql);
+// PDOクラスのprepareメソッドを実行していて、その結果を$stmtに代入しています。
+$stmt = $pdo->prepare($sql);
+// $pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返してくれる
 
 // プリペアドステートメントを実行する
-$prepare->execute();
+$stmt->execute();
 
-$results = $prepare->fetchAll();
-// PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
-// (PDO::FETCH_ASSOC);
+$results = $stmt->fetchAll();
 
-// 結果を出力
-// print_r($results);
-$stmt = $pdo->query('SELECT * FROM big_questions');
+// 結果を出力 print_r($results);
+// $stmt = $pdo->query('SELECT * FROM big_questions');
 ?>
 
 <?php foreach ($results as $result) : ?>

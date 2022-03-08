@@ -1,64 +1,72 @@
 <?php
-// require('dbconnect.php');
+require('dbconnect.php');
+
+// pgidを取得する
+$pgid = filter_input(INPUT_GET, 'id');
+// print_r($pgid);
+// $results = $pgid->fetchAll();
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+// }
+
+// ----ちょっとprepared statement色々やる！----
+// $question_id = htmlspecialchars($_GET['id']);
+
+// ----id=?にしたらできた！なるほど----
+// $page = 'SELECT name FROM big_questions WHERE id = $pgid';
+$page = 'SELECT name FROM big_questions WHERE id = ?';
+
+// PDOStatementクラスのインスタンスを生成します。
+$stmt2 = $pdo->prepare($page);
+
+// プリペアドステートメントを実行する
+// $prepare->execute();
+$stmt2->execute(array($id));
+
+$pages = $stmt2->fetchAll();
+}else {
+    header("Location: /");
 }
 
-$pgid = filter_input(INPUT_GET, 'id');
-print_r($pgid);
 
 // quizyのページごとに変わる部分だけをdatabaseから取ってくる
 // pageidに置き換えたら自動的に内容が変わるよね
 
-// $dsn = 'mysql:dbname=quizydb;charset=utf8;host=mysql';
-// $user = 'karen';
-// $password = 'password';
 
-// try {
-//     $pdo = new PDO(
-//         $dsn,
-//         $user,
-//         $password,
-//         [
-//             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-//             // PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
-//             // (PDO::FETCH_ASSOC);
-//         ]
-//     );
-
-    $sql = 'SELECT name FROM big_questions WHERE id = $pgid';
-    $sql = $pdo->query('SELECT name FROM big_questions WHERE id = $pgid');
+    $page = 'SELECT name FROM big_questions WHERE id = $pgid';
+    // $sql = $pdo->query('SELECT name FROM big_questions WHERE id = $pgid');
 
     // PDOStatementクラスのインスタンスを生成します。
-    $prepare = $pdo->prepare($sql);
+    // $prepare = $pdo->prepare($sql);
 
     // プリペアドステートメントを実行する
-    $prepare->execute();
+    // $prepare->execute();
 
-    $result = $prepare->fetchAll();
+    // $result = $prepare->fetchAll();
 
 
 
     // ---SELECT文を変数に格納----
 
     // タイトル「東京/広島」を取得
-    $title_stmt = "SELECT * FROM big_questions WHERE id = $pgid";
+    $title_stmt = "SELECT * FROM big_questions WHERE id = $page";
+    $title_stmt = "SELECT * FROM big_questions WHERE id = $page";
     // SQLステートメントを実行し、結果を変数に格納
     $title = $pdo->query($title_stmt);
 
-    $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $pgid";
-    $selections2 = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $pgid AND questions.id = $i";
+    $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $page";
+    $selections2 = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $page AND questions.id = $i";
     $selection = $pdo->query($selections);
     $selection2 = $pdo->query($selections2);
 
-    // $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = pgid";
+    // $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = page";
     $image1 = "SELECT image FROM questions WHERE big_question_id = 1 INNER JOIN choices on questions.id = choices.question_id";
 
     // 画像の取得
-    $image1 = "SELECT * FROM questions WHERE big_question_id = $pgid and id = 1";
-    $image2 = "SELECT * FROM questions WHERE big_question_id = $pgid and id = 2";
-    $image3 = "SELECT * FROM questions WHERE big_question_id = $pgid and id = 3";
+    $image1 = "SELECT * FROM questions WHERE big_question_id = $page and id = 1";
+    $image2 = "SELECT * FROM questions WHERE big_question_id = $page and id = 2";
+    $image3 = "SELECT * FROM questions WHERE big_question_id = $page and id = 3";
     $img1 =  $pdo->query($image1);
     $img2 =  $pdo->query($image2);
     $img3 =  $pdo->query($image3);
@@ -88,7 +96,7 @@ print_r($pgid);
     <title>
         これは
         ページ
-        <?php echo $pgid; ?>
+        <?php echo $page; ?>
     </title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>

@@ -5,6 +5,8 @@ $user = 'karen';
 $password = 'password';
 
 try {
+
+    // PDOStatementクラスのインスタンスを生成します。
     $pdo = new PDO(
         $dsn,
         $user,
