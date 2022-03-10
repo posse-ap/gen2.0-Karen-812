@@ -1,3 +1,7 @@
+<!--  全体的な指針
+        quizyのページごとに変わる部分だけをdatabaseから取ってくる
+        pageidに置き換えたら自動的に内容が変わるよね -->
+
 <?php
 require('dbconnect.php');
 
@@ -8,12 +12,26 @@ $pgid = filter_input(INPUT_GET, 'id');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-// }
 
-// ----ちょっとprepared statement色々やる！----
-// $question_id = htmlspecialchars($_GET['id']);
+// ----　ちょっとprepared statement色々やる！　----
 
-// ----id=?にしたらできた！なるほど----
+// $sql = $pdo->query('SELECT name FROM big_questions WHERE id = $pgid');
+
+// PDOStatementクラスのインスタンスを生成します。
+    // $prepare = $pdo->prepare($sql);
+
+// プリペアドステートメントを実行する
+    // $prepare->execute();
+
+    // $result = $prepare->fetchAll();
+
+//　　これ何？ 　→$question_id = htmlspecialchars($_GET['id']);
+
+
+
+
+// ----　id=?　にしたらできた！　なるほど　----
+
 // $page = 'SELECT name FROM big_questions WHERE id = $pgid';
 $page = 'SELECT name FROM big_questions WHERE id = ?';
 
@@ -25,55 +43,47 @@ $stmt2 = $pdo->prepare($page);
 $stmt2->execute(array($id));
 
 $pages = $stmt2->fetchAll();
+
 }else {
     header("Location: /");
 }
-
-
-// quizyのページごとに変わる部分だけをdatabaseから取ってくる
-// pageidに置き換えたら自動的に内容が変わるよね
-
-
-    $page = 'SELECT name FROM big_questions WHERE id = $pgid';
-    // $sql = $pdo->query('SELECT name FROM big_questions WHERE id = $pgid');
-
-    // PDOStatementクラスのインスタンスを生成します。
-    // $prepare = $pdo->prepare($sql);
-
-    // プリペアドステートメントを実行する
-    // $prepare->execute();
-
-    // $result = $prepare->fetchAll();
 
 
 
     // ---SELECT文を変数に格納----
 
     // タイトル「東京/広島」を取得
-    $title_stmt = "SELECT * FROM big_questions WHERE id = $page";
-    $title_stmt = "SELECT * FROM big_questions WHERE id = $page";
+    $title_stmt = "SELECT * FROM big_questions WHERE id = $pgid";
+    // $title_stmt = "SELECT * FROM big_questions WHERE id = $page";
     // SQLステートメントを実行し、結果を変数に格納
     $title = $pdo->query($title_stmt);
 
-    $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $page";
-    $selections2 = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $page AND questions.id = $i";
-    $selection = $pdo->query($selections);
-    $selection2 = $pdo->query($selections2);
+    // ーーー　ループ使おうとしてダメだったやつ　ーーー
+    // $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $pgid";
+    // $selections2 = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = $pgid AND questions.id = $i";
+    // $selection = $pdo->query($selections);
+    // $selection2 = $pdo->query($selections2);
 
     // $selections = "SELECT * FROM choices INNER JOIN questions on choices.question_id = questions.id WHERE big_question_id = page";
+
+    // ーーー　どうしようコレ　ーーー
     $image1 = "SELECT image FROM questions WHERE big_question_id = 1 INNER JOIN choices on questions.id = choices.question_id";
 
     // 画像の取得
-    $image1 = "SELECT * FROM questions WHERE big_question_id = $page and id = 1";
-    $image2 = "SELECT * FROM questions WHERE big_question_id = $page and id = 2";
-    $image3 = "SELECT * FROM questions WHERE big_question_id = $page and id = 3";
-    $img1 =  $pdo->query($image1);
-    $img2 =  $pdo->query($image2);
-    $img3 =  $pdo->query($image3);
+    // $image1 = "SELECT * FROM questions WHERE big_question_id = $pgid and id = 1";
+    $image = "SELECT * FROM questions WHERE big_question_id = $pgid and id = ?";
+    $img_prepare = $pdo->prepare($image);
+    //execute(array(2))　と　fetchAll();　は下でやってる
 
     // 選択肢を大問ごとに取得
+    $choices = "SELECT * FROM choices WHERE question_id = ?";
+    $ch_prepare = $pdo->prepare($choices);
+    
     // $choices1 = "SELECT * FROM choices WHERE question_id = 1";
     // $choices2 = "SELECT * FROM choices WHERE question_id = 2";
+
+    // $choices1 = "SELECT * FROM choices WHERE big_question_id = $pgid and question_id = 1";
+    // $choices2 = "SELECT * FROM choices WHERE big_question_id = $pgid and question_id = 2";
     // $ch1 = $pdo->query($choices1);
     // $ch2 = $pdo->query($choices2);
 
@@ -96,7 +106,7 @@ $pages = $stmt2->fetchAll();
     <title>
         これは
         ページ
-        <?php echo $page; ?>
+        <?php echo $pgid; ?>
     </title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
@@ -153,45 +163,64 @@ $pages = $stmt2->fetchAll();
     <div id="question">
         <?php
 
-        for ($i = 1; $i <= 2; $i++) {
-            echo $i;
-            echo $selection2['name'];
-        }
+        // for ($i = 1; $i <= 2; $i++) {
+        //     echo $i;
+        //     echo $selection2['name'];
+        // }
 
         // foreach ($selection as $waa) {
         //     echo $waa['name'];
         //     echo $waa['image'];
         // }
 
-        // foreach ($img1 as $q_img) {
-        //             echo '<img src="';
-        //             echo $q_img['image'];
-        //             echo '" alt="">';
-        //             echo '<br>';
-        //         }
-        //         echo '<br>';
-        //         // foreach文で配列の中身を一行ずつ出力
-        //         foreach ($ch1 as $row) {
-        //             // データベースのフィールド名で出力
-        //             echo $row['name'];
+        $img_prepare->execute(array(1));
+        $img = $img_prepare->fetchAll();
 
-        //             // 改行を入れる
-        //             echo '<br>';
-        //         }
-        // foreach ($img2 as $q_img) {
-        // echo '<img src="';
-        // echo $q_img['image'];
-        // echo '" alt="">';
-        // echo '<br>';
-        // }
+        foreach ($img as $q_img) {
+                    echo '<img src="';
+                    echo $q_img['image'];
+                    echo '" alt="">';
+                    echo '<br>';
+                }
 
-        // foreach ($ch2 as $row) {
-        //     // データベースのフィールド名で出力
-        //     echo $row['name'];
+        $ch_prepare->execute(array(1));
+        $ch = $ch_prepare->fetchAll();
 
-        //     // 改行を入れる
-        //     echo '<br>';
-        // }
+        // foreach文で配列の中身を一行ずつ出力
+
+        foreach ($ch as $row) {
+            // データベースのフィールド名で出力
+            echo '<li>';
+            echo $row['name'];
+            echo '</li>';
+
+            // 改行を入れる
+            echo '<br>';
+        }
+
+        $img_prepare->execute(array(2));
+        $img = $img_prepare->fetchAll();
+
+        foreach ($img as $q_img) {
+                    echo '<img src="';
+                    echo $q_img['image'];
+                    echo '" alt="">';
+                    echo '<br>';
+                }
+
+                echo '<br>';
+
+
+        $ch_prepare->execute(array(2));
+        $ch = $ch_prepare->fetchAll();
+        foreach ($ch as $row) {
+            echo '<li>';
+            echo $row['name'];
+            echo '</li>';
+
+            echo '<br>';
+        }
+
         ?>
     </div>
 </body>
