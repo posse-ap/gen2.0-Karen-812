@@ -1,6 +1,8 @@
-<!--  全体的な指針
-        quizyのページごとに変わる部分だけをdatabaseから取ってくる
-        pageidに置き換えたら自動的に内容が変わるよね -->
+<!-- 
+    全体的な指針
+    ・quizyのページごとに変わる部分だけをdatabaseから取ってくる
+    ・pageidに置き換えたら自動的に内容が変わるよね 
+-->
 
 <?php
 require('dbconnect.php');
