@@ -1,0 +1,274 @@
+{
+  "canvas": {
+    "version": "2.2.11",
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": -38,
+    "scrollLeft": -147.171875,
+    "zoomLevel": 1,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": false,
+      "columnPrimaryKey": true,
+      "columnUnique": false,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "MySQL",
+    "databaseName": "購入品目",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnDataType",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement",
+        "columnDefault",
+        "columnComment"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "questions",
+        "comment": "大問",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "da92179c-781f-4e43-b8bc-0bc661ae5f11"
+          },
+          {
+            "name": "big_question_id",
+            "comment": "東京/広島",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 93.076171875,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "ec895817-3ecc-4179-827e-8742ba1d5f25"
+          },
+          {
+            "name": "image",
+            "comment": "問題",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "8c2ad6ae-71fc-4816-b155-7a58562b5ffe"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 143,
+          "top": 95,
+          "zIndex": 93,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "53ce9c18-5245-47bd-b598-1d57bd36c6b7"
+      },
+      {
+        "name": "choices",
+        "comment": "選択肢",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "a5b5012a-fbd3-44cf-a7f8-589e2f463562"
+          },
+          {
+            "name": "question_id",
+            "comment": "問題番号",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 68.498046875,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7ea6a9cc-321f-423e-ba89-85903627ef2f"
+          },
+          {
+            "name": "name",
+            "comment": "選択肢",
+            "dataType": "",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "584c70b8-9a79-4422-bf49-2dbe231c285b"
+          },
+          {
+            "name": "valid",
+            "comment": "",
+            "dataType": "BOOLEAN",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.8544921875,
+              "widthDefault": 60
+            },
+            "id": "8f977765-a56e-4791-bcc9-d15503a2b7dd"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 198,
+          "top": 349,
+          "zIndex": 95,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "5a8d2a9c-a495-497e-b790-5cd586245519"
+      }
+    ],
+    "indexes": []
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": [
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "53ce9c18-5245-47bd-b598-1d57bd36c6b7",
+          "columnIds": [
+            "8c2ad6ae-71fc-4816-b155-7a58562b5ffe"
+          ],
+          "x": 333.0380859375,
+          "y": 225.5,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "5a8d2a9c-a495-497e-b790-5cd586245519",
+          "columnIds": [
+            "7ea6a9cc-321f-423e-ba89-85903627ef2f"
+          ],
+          "x": 378.17626953125,
+          "y": 349,
+          "direction": "top"
+        },
+        "constraintName": "fk_information_to_",
+        "visible": true,
+        "id": "ca5c8bb5-e4de-4448-8267-ee21bde85977"
+      }
+    ]
+  }
+}

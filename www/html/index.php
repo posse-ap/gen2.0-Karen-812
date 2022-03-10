@@ -1,45 +1,28 @@
 <?php
 // phpinfo();
+require('dbconnect.php');
 
-$dsn = 'mysql:dbname=quizydb;charset=utf8;host=mysql';
-$user = 'karen';
-$password = 'password';
+$sql = 'SELECT * FROM big_questions';
 
-try {
-    $dbh = new PDO(
-        $dsn, 
-        $user, 
-        $password,   
-    [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]
-    );
-    echo "接続成功\n";
+// PDOクラスのprepareメソッドを実行していて、その結果を$stmtに代入しています。
+$stmt = $pdo->prepare($sql);
+// $pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返してくれる
 
-    // -------ここから12/27の週分を新しく書いてくよ！------
+// プリペアドステートメントを実行する
+$stmt->execute();
 
-    $sql = 'SELECT * FROM big_questions';
+$results = $stmt->fetchAll();
 
-    // PDOStatementクラスのインスタンスを生成します。
-    $prepare = $dbh->prepare($sql);
-
-    // プリペアドステートメントを実行する
-    $prepare->execute();
-    
-    $result = $prepare->fetchAll();
-    // PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
-    // (PDO::FETCH_ASSOC);
-    
-    // 結果を出力
-    print_r($result);
-
-    Echo "<a href = http://localhost:8080/quiz.php?id=1> 1だよ</a>" . PHP_EOL;
-    Echo "<a href = http://localhost:8080/quiz.php?id=2> 2だよ </a>";
-    // Echo "<a href = $ url> $ site_title </a>";
-
-} catch (PDOException $e) {
-    echo "接続失敗: " . $e->getMessage() . "\n";
-    exit();
-}
-
+// 結果を出力 print_r($results);
+// $stmt = $pdo->query('SELECT * FROM big_questions');
 ?>
+
+<?php foreach ($results as $result) : ?>
+    <p>
+        <a href="/quiz.php?id=<?php echo $result['id']; ?>"><?php echo $result['id'] . '：' . $result['name']; ?></a>
+    </p>
+<?php endforeach; ?>
+
+<?php
+// Echo "<a href=http://localhost:8080/quiz.php?id=1> 1だよ</a>" . PHP_EOL;
+// Echo "<a href=http://localhost:8080/quiz.php?id=2> 2だよ </a>";

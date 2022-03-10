@@ -10,15 +10,15 @@ SET CHARACTER_SET_CONNECTION = utf8;
 
 DROP TABLE IF EXISTS big_questions; 
 DROP TABLE IF EXISTS questions; 
+DROP TABLE IF EXISTS choices; 
 -- 上かくといいらしい
 CREATE TABLE big_questions (id int, name varchar(255)) DEFAULT CHARACTER SET utf8;
 INSERT INTO big_questions (id, name) VALUES (1,'東京の難読地名クイズ');
 INSERT INTO big_questions (id, name) VALUES (2,'広島県の難読地名クイズ');
 
 CREATE TABLE questions (id int, big_question_id int, image varchar(255));
-INSERT INTO questions (id, big_question_id, image) VALUES (1, 1, 'takanawa.png');
-INSERT INTO questions (id, big_question_id, image) VALUES (2, 1, 'kameido.png');
-INSERT INTO questions (id, big_question_id, image) VALUES (3, 2, 'mukainada.png');
+INSERT INTO questions (id, big_question_id, image)
+VALUES (1, 1, 'takanawa.png'), (2, 1, 'kameido.png'), (3, 2, 'mukainada.png');
 
 -- boolean https://qiita.com/ritukiii/items/3a3667391d4d65678d82
 CREATE TABLE choices (id int, question_id int, name varchar(255), valid boolean);
