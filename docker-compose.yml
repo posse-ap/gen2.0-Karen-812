@@ -16,15 +16,9 @@ services:
       - ./www/html:/var/www/html
     depends_on:
       - db
-
-  db:
-    image: mysql:5.7
-    ports:
-      - 13306:3306
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
+    # quizyの時と違うところ
+    #   - mysql
+    # image: php:7.4-fpm
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -32,3 +26,19 @@ services:
       - 8888:80
     depends_on:
       - db
+
+  db:
+    platform: linux/x86_64
+    image: mysql:latest
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_DATABASE: webapp-db
+      MYSQL_USER: karen
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - 13306:3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
