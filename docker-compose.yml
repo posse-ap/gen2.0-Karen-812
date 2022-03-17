@@ -32,7 +32,7 @@ services:
     image: mysql:latest
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     environment:
-      MYSQL_DATABASE: webapp-db
+      MYSQL_DATABASE: webapp_db
       MYSQL_USER: karen
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: secret
