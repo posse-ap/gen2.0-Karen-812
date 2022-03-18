@@ -9,10 +9,12 @@ USE webapp_db;
 -- 投稿するときに記録されるデータまとめ
 DROP TABLE IF EXISTS input_data;
 CREATE TABLE input_data (
+    id INT AUTO_INCREMENT, 
     `date` DATE, 
     `hours` TINYINT, 
     `languages` TINYINT, 
-    `contents` TINYINT);
+    `contents` TINYINT,
+    PRIMARY KEY(id));
 
 INSERT INTO 
 input_data (`date`, `hours`, `languages`, `contents`) 

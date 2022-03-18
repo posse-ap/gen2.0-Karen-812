@@ -15,11 +15,13 @@ try {
             // (PDO::FETCH_ASSOC);
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            // にすることでエラーが吐かれるようにしましたか？ https://www.php.net/manual/ja/pdo.error-handling.php
         ]
     );
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "接続成功";
-
+    // echo "接続成功";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();

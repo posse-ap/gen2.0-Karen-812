@@ -1,26 +1,20 @@
 <?php
 require('dbconnect.php');
 
-$sql = 'SELECT sum(`hours`) FROM input_data';
+$sql = 'SELECT * FROM input_data WHERE `date` = ?' ;
 
-// //①PDOクラスのprepareメソッドを実行、その結果を$stmtに代入
-// //②$pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返す
-// //③プリペアドステートメントを実行する
+// ①PDOクラスのprepareメソッドを実行、その結果を$stmtに代入
+// ②$pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返す
+// ③プリペアドステートメントを実行する
 // $stmt = $pdo->query('SELECT * FROM big_questions');
 
 $stmt = $pdo->prepare($sql);
-$stmt->execute();
+$stmt->execute(array(220314));
 
 $results = $stmt->fetchAll();
 
-// 結果を出力 
-print_r($results);
-
-foreach ($results as $result) : ?>
-    <p>
-        <?php echo $result[`hours`]; ?>
-    </p>
-<?php endforeach; ?>
+// 結果を出力 print_r($results);
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -68,7 +62,13 @@ foreach ($results as $result) : ?>
             <section class="first_top">
                 <div class="card period">
                     Today
-                    <p class="number">3</p>
+                    <p class="number">
+                        <?php foreach ($results as $result){
+                            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
+                            echo $result['hours'];
+                        }; ?>
+                    </p>
+
                     <p class="unit">hour</p>
                 </div>
                 <div class="card period">
@@ -109,6 +109,7 @@ foreach ($results as $result) : ?>
             <p>記録・投稿</p>
         </div>
     </footer>
+
 
     <!-- モーダルだよ🍩 -->
     <div id="modal_content" class="modal_closed">
