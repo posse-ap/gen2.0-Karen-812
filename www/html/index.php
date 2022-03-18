@@ -2,7 +2,7 @@
 // phpinfo();
 require('dbconnect.php');
 
-$sql = 'SELECT * FROM input_data';
+$sql = 'SELECT id FROM input_data WHERE id=?';
 
 // PDOクラスのprepareメソッドを実行していて、その結果を$stmtに代入しています。
 $stmt = $pdo->prepare($sql);
