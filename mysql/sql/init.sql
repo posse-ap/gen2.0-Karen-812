@@ -19,6 +19,7 @@ CREATE TABLE input_data (
 INSERT INTO 
 input_data (`date`, `hours`, `languages`, `contents`) 
 VALUES 
+(210314,5,5,5),
 (220314,5,5,5),
 (220315,5,5,5),
 (220316,5,5,5),

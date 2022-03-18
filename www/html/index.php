@@ -14,18 +14,23 @@ $day_prepare->execute(array(220314));
 $hours_par_day = $day_prepare->fetchAll();
 
 // 今月の勉強時間
-$search = '2203%';
-// $month = 'SELECT sum(`hours`) FROM input_data WHERE `date` = ?' ;
-// $month_prepare = $pdo->prepare($month);
+$search = '%22-03%';
 $month_prepare = $pdo->prepare(
-    'SELECT sum(`hours`) FROM input_data WHERE `date` LIKE :search'
-    // 'SELECT sum(`date`) FROM input_data WHERE `date` LIKE 2203%'
+    'SELECT SUM(`hours`) AS total FROM input_data WHERE `date` LIKE :search'
 );
 $month_prepare->execute(['search' => $search]);
-// $month_prepare->execute();
 $hours_par_month = $month_prepare->fetchAll();
-print_r($hours_par_month)
-// 結果を出力 print_r($results);
+// print_r($hours_par_month);
+// print_r($hours_par_month['total']);
+
+// 今年の勉強時間
+$search_year = '%21%';
+$year_prepare = $pdo->prepare(
+    'SELECT SUM(`hours`) AS total2 FROM input_data WHERE `date` LIKE :search_year'
+);
+$year_prepare->execute(['search_year' => $search_year]);
+$hours_par_year = $year_prepare->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -87,14 +92,18 @@ print_r($hours_par_month)
                     Month
                     <p class="number">
                         <?php foreach ($hours_par_month as $hour_par_month){
-                            echo $hour_par_month;
+                            echo $hour_par_month['total'];
                         }; ?>
                     </p>
                     <p class="unit">hour</p>
                 </div>
                 <div class="card period">
                     Total
-                    <p class="number">1348</p>
+                    <p class="number">
+                        <?php foreach ($hours_par_year as $hour_par_year){
+                            echo $hour_par_year['total2'];
+                        }; ?>
+                    </p>
                     <p class="unit">hour</p>
                 </div>
             </section>
