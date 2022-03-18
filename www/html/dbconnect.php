@@ -1,5 +1,4 @@
 <?php
-
 $dsn = 'mysql:dbname=webapp_db;charset=utf8;host=db';
 $user = 'karen';
 $password = 'password';

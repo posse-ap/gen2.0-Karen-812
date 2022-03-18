@@ -1,4 +1,7 @@
 SET CHARSET UTF8;
+USE mysql;
+alter user 'karen'@'%' identified with mysql_native_password by 'password';
+
 DROP DATABASE IF EXISTS webapp_db;
 CREATE DATABASE webapp_db;
 USE webapp_db;
