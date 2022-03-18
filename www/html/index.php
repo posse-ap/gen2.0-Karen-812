@@ -1,18 +1,30 @@
 <?php
 require('dbconnect.php');
 
-$sql = 'SELECT * FROM input_data WHERE `date` = ?' ;
 
 // ①PDOクラスのprepareメソッドを実行、その結果を$stmtに代入
 // ②$pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返す
 // ③プリペアドステートメントを実行する
 // $stmt = $pdo->query('SELECT * FROM big_questions');
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute(array(220314));
+// 今日の勉強時間
+$day = 'SELECT * FROM input_data WHERE `date` = ?' ;
+$day_prepare = $pdo->prepare($day);
+$day_prepare->execute(array(220314));
+$hours_par_day = $day_prepare->fetchAll();
 
-$results = $stmt->fetchAll();
-
+// 今月の勉強時間
+$search = '2203%';
+// $month = 'SELECT sum(`hours`) FROM input_data WHERE `date` = ?' ;
+// $month_prepare = $pdo->prepare($month);
+$month_prepare = $pdo->prepare(
+    'SELECT sum(`hours`) FROM input_data WHERE `date` LIKE :search'
+    // 'SELECT sum(`date`) FROM input_data WHERE `date` LIKE 2203%'
+);
+$month_prepare->execute(['search' => $search]);
+// $month_prepare->execute();
+$hours_par_month = $month_prepare->fetchAll();
+print_r($hours_par_month)
 // 結果を出力 print_r($results);
 ?>
 
@@ -63,9 +75,9 @@ $results = $stmt->fetchAll();
                 <div class="card period">
                     Today
                     <p class="number">
-                        <?php foreach ($results as $result){
+                        <?php foreach ($hours_par_day as $hour_par_day){
                             // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
-                            echo $result['hours'];
+                            echo $hour_par_day['hours'];
                         }; ?>
                     </p>
 
@@ -73,7 +85,11 @@ $results = $stmt->fetchAll();
                 </div>
                 <div class="card period">
                     Month
-                    <p class="number">120</p>
+                    <p class="number">
+                        <?php foreach ($hours_par_month as $hour_par_month){
+                            echo $hour_par_month;
+                        }; ?>
+                    </p>
                     <p class="unit">hour</p>
                 </div>
                 <div class="card period">
