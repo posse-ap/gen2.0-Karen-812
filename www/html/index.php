@@ -1,45 +1,8 @@
 <?php
 require('dbconnect.php');
+require('function.php');
 
-
-// ①PDOクラスのprepareメソッドを実行、その結果を$stmtに代入
-// ②$pdo->prepare()が成功した場合、PDOStatementオブジェクト（=PDOStatementクラスをインスタンス化したもの）を返す
-// ③プリペアドステートメントを実行する
-// $stmt = $pdo->query('SELECT * FROM big_questions');
-
-// 今日の勉強時間
-$day = 'SELECT * FROM input_data WHERE `date` = ?' ;
-$day_prepare = $pdo->prepare($day);
-$day_prepare->execute(array(220314));
-$hours_par_day = $day_prepare->fetchAll();
-
-// 今月の勉強時間
-$search = '%22-03%';
-$month_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) AS total FROM input_data WHERE `date` LIKE :search'
-);
-$month_prepare->execute(['search' => $search]);
-$hours_par_month = $month_prepare->fetchAll();
-
-// 合計の勉強時間
-$total_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) AS total2 FROM input_data'
-);
-$total_prepare->execute();
-$hours_total = $total_prepare->fetchAll(); 
-
-// 言語ごとの集計
-$lang_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) AS total_by_lang FROM input_data WHERE `languages`=?'
-);
-$lang_prepare->execute(array(5));
-$hours_by_lang = $lang_prepare->fetchAll();
-// print_r($hours_by_lang);
-
-foreach ($hours_by_lang as $hour_by_lang){
-    // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
-    echo $hour_by_lang['total_by_lang'];
-}; 
+include('db_select.php');
 
 
 ?>
@@ -62,7 +25,7 @@ foreach ($hours_by_lang as $hour_by_lang){
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/style.css">
     <title>POSSE app</title>
 
     <!-- graph -->
@@ -146,129 +109,8 @@ foreach ($hours_by_lang as $hour_by_lang){
         </div>
     </footer>
 
+    <?php include('_modal.php'); ?>
 
-    <!-- モーダルだよ🍩 -->
-    <div id="modal_content" class="modal_closed">
-        <div onclick="close_modal()" class="close_button">
-            <i class="fas fa-times grey"></i>
-        </div>
-        <section id="modal_inside">
-            <section class="upper_section">
-                <section class="modal_first">
-                    <div class="study_day inside">
-                        <p>学習日</p>
-                        <input type="text" class="input_box calender" id="calender">
-                    </div>
-                    <div class="study_contents inside modal_margin">
-                        <p>学習コンテンツ(複数選択可)</p>
-                        <div class="checkbox_outside grey">
-                            <label>
-                                <input type="checkbox" class="checkbox" id="checkboxes" onclick="checkcheck()">
-                                <span class="checkmark"></span>
-                                N予備校
-                            </label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label>
-                                <input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                ドットインストール
-                            </label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label>
-                                <input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                POSSE課題
-                            </label>
-                        </div>
-                    </div>
-                    <div class="study_languages inside modal_margin">
-                        <p>学習言語(複数選択可)</p>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                HTML</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                CSS</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                JavaScript</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                PHP</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                Laravel</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                SQL</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                SHELL</label>
-                        </div>
-                        <div class="checkbox_outside grey">
-                            <label><input type="checkbox" class="checkbox">
-                                <span class="checkmark"></span>
-                                情報システム基礎知識(その他)</label>
-                        </div>
-                </section>
-                <section class="modal_second">
-                    <div class="study_hour inside">
-                        <p>学習時間</p>
-                        <input type="text" class="input_box">
-                    </div>
-                    <div class="twitter_comment inside modal_margin">
-                        <p>Twitter用コメント</p>
-                        <!-- <input type="text" class="input_box comment" id="twitter_com"> -->
-                        <textarea name="twitter_com" id="twitter_com" class="input_box comment"></textarea>
-                    </div>
-                    <div class="twitter inside">
-                        <label>
-                            <input type="checkbox" id="tweet" class="checkbox">
-                            <span class="checkmark big_check"></span>
-                            Twitterに自動投稿する
-                        </label>
-                    </div>
-                </section>
-            </section>
-            <section class="under_section">
-                <div class="modal_button" onclick="post()">記録・投稿</div>
-            </section>
-        </section>
-
-
-        <!-- ローディング・投稿完了画面 -->
-        <section class="before_post" id="posted1">
-            <div class="loader-wrap">
-                <div class="loader">Loading...</div>
-            </div>
-        </section>
-
-        <section class="before_post" id="posted">
-            <p class="green">AWESOME!</p>
-            <i class="fas fa-check-circle green checkmark2"></i>
-            <p>記録・投稿</p>
-            <p>完了しました</p>
-        </section>
-
-        <!-- <p><a id="modal-close" class="button-link">閉じる</a></p> -->
-    </div>
-
-    <script src="main.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
@@ -285,7 +127,7 @@ foreach ($hours_by_lang as $hour_by_lang){
 
     let calender = document.getElementById("calender");
     let fp = flatpickr(calender, {
-    dateFormat: "Y-n-j(l)", // フォーマットの変更
+    dateFormat: "Y年n月j日", // フォーマットの変更
     });
 
     function open_modal() {
@@ -304,6 +146,7 @@ foreach ($hours_by_lang as $hour_by_lang){
     }
     }
 
+    
     function post() {
     document.getElementById("posted1").className = "after_post2";
     setTimeout(function(){
@@ -318,6 +161,7 @@ foreach ($hours_by_lang as $hour_by_lang){
     }, 3000);
 
     }
+    
 
     // <!-- 棒グラフ  -->
         google.charts.load("current", { packages: ["corechart", "bar"] });
@@ -358,7 +202,7 @@ foreach ($hours_by_lang as $hour_by_lang){
             [27, 1],
             [28, 1],
             [29, 0],
-            [30, 8],
+            [30, 0],
 
             // [{v: [8, 0, 0], f: '8 am'}, 1],
             // [{v: [9, 0, 0], f: '9 am'}, 2],
