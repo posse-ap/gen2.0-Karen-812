@@ -2,34 +2,28 @@
 
 require('function.php');
 
-
-// $message = filter_input(INPUT_GET, 'date');
-// $content = filter_input(INPUT_GET, 'nyobi');
-
-// $colors = filter_input(INPUT_GET, 'nyobi', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-// $colors = empty($colors) ? 'None selected' : implode(',', $colors);
-
-// include('../app/_parts/_header.php');
-
-// POST
-$filename = 'init.sql';
-// $filename = '../../mysql/sql/init.sql';
-$messages = file($filename, FILE_IGNORE_NEW_LINES);
-
-$message1 = trim(filter_input(INPUT_POST, 'nyobi'));
-$message = trim(filter_input(INPUT_POST, 'message'));
+// POSTされたのを受け取る
+$filename = 'init.sql';  // できない！涙 = '../../mysql/sql/init.sql';
+$message1 = trim(filter_input(INPUT_POST, 'contents'));
+$day = trim(filter_input(INPUT_POST, 'date'));
 $message = $message !== '' ? $message : '...';
 
-// $filename = 'input_data.txt';
+
+// ファイルに書き込み
+$content = implode(' ', $_POST['contents']);
 $fp = fopen($filename, 'a');
-fwrite($fp, $message);
+fwrite($fp, $content);
 fclose($fp);
 
 /*  内部
 <ul>
-  <?php foreach ($messages as $message): ?>
-    <li><?= h($message); ?></li>
-  <?php endforeach; ?>
+  <?php 
+    $messages = file($filename, FILE_IGNORE_NEW_LINES);
+    $message = trim(filter_input(INPUT_POST, 'message'));
+    
+    foreach ($messages as $message): ?>
+        <li><?= h($message); ?></li>
+    <?php endforeach; ?>
 </ul>
 */
 
@@ -46,9 +40,11 @@ fclose($fp);
 
     
     <p>
-    <?= h($message1); ?>
-    <?= h($nyobi); ?>
-    <?= h($colors); ?>
+    <?php
+    // var_dump( $_POST['contents']);
+    echo $content; // 2,3,4
+    echo $day;
+    ?>
 </p>
 <p>
     <a href="index.php">Go back</a>

@@ -16,21 +16,21 @@
                         <p>学習コンテンツ(複数選択可)</p>
                         <div class="checkbox_outside grey">
                             <label>
-                                <input type="checkbox" name="nyobi" class="colors[]" value="nyobi" id="checkboxes" onclick="checkcheck()">
+                                <input type="checkbox" name="contents[]" value="1" class="checkbox" id="checkboxes" onclick="checkcheck()">
                                 <span class="checkmark"></span>
                                 N予備校
                             </label>
                         </div>
                         <div class="checkbox_outside grey">
                             <label>
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" name="contents[]" value="2" class="checkbox">
                                 <span class="checkmark"></span>
                                 ドットインストール
                             </label>
                         </div>
                         <div class="checkbox_outside grey">
                             <label>
-                                <input type="checkbox" class="checkbox">
+                                <input type="checkbox" name="contents[]" value="3" class="checkbox">
                                 <span class="checkmark"></span>
                                 POSSE課題
                             </label>
