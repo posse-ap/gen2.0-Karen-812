@@ -39,7 +39,7 @@ include('db_select.php');
 
     <header class="header inner">
         <h1>
-            <img src="posse_logo.jpeg" alt="POSSE">
+            <img src="./src/posse_logo.jpeg" alt="POSSE">
         </h1>
         <p class="unit">4th week</p>
         <div id="header_button" class="button" onclick="open_modal()">
@@ -172,6 +172,11 @@ include('db_select.php');
         data.addColumn("number", "Day");
         data.addColumn("number", "Time");
 
+        <?php foreach ($hours_par_day as $hour_par_day){
+                            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
+                            echo $hour_par_day['hours'];
+                        }; ?>
+
         data.addRows([
             [1, 3],
             [2, 4],
@@ -218,7 +223,7 @@ include('db_select.php');
         /**/
 
     // 🆕
-    // var data = new google.visualization.DataTable(<?=$jsonTable?>);
+    // var data = new google.visualization.DataTable(<?=$jsonTable?>);　←整形済んだら入れ込む
 
         var options = {
             title: "",
