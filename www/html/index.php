@@ -117,7 +117,9 @@ include('db_select.php');
         crossorigin="anonymous"></script>
 
 </body>
-    <!-- ここからPhase2-->
+
+
+    <!-------------- ここからPhase2 -------------->
 
     <!--Load the Ajax API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -163,6 +165,7 @@ include('db_select.php');
     }
     
 
+
     // <!-- 棒グラフ  -->
         google.charts.load("current", { packages: ["corechart", "bar"] });
         google.charts.setOnLoadCallback(drawBasic);
@@ -176,6 +179,41 @@ include('db_select.php');
                             // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
                             echo $hour_par_day['hours'];
                         }; ?>
+
+        // JSで整形！
+            // var obj = { tanuki:'pon-poko', kitsune:'kon-kon', neko:'nyan-nyan' };
+            var obj = <?php echo $c; ?>
+
+            /*
+            // しかしこれはエラーです
+            // obj.forEach(function (v,i) {
+            // 処理...
+            // });
+            
+            // var new_obj =obj.substring(0, 6);
+
+            // こうすればOK
+            // Object.keys(obj).forEach(function (key) {
+            //     console.log([key] + "," + obj[key]);
+            // });
+
+            for (const [key, value] of Object.entries(obj)) {
+                console.log([value]);
+                }
+            
+            Object.entries(obj).forEach(
+            entry => console.log(entry)  //   1回目: [ "x," 10]                   //   2回目: [ "y" , 20]
+            );
+            */
+
+
+
+            for (const [key, value] of Object.entries(obj)) {
+            console.log("[" +  [key] + "," + [value]+ "]");
+            const column_data = "[" +  [key] + "," + [value]+ "]";
+            }
+
+
 
         data.addRows([
             [1, 3],
@@ -303,6 +341,7 @@ include('db_select.php');
         // https://stackoverflow.com/questions/41771333/sizing-google-charts-to-fill-div-width-and-height/41771608
         width: "98%",
         },
+        'chartArea': {'width': '95%', 'height': '95%'},
         legend: { position: "bottom" },
     };
 
@@ -330,6 +369,9 @@ include('db_select.php');
         // height: 300,
         colors: ["#0345EC", "#0F71BD", "#20BDDE"],
         legend: { position: "bottom" },
+        // スーパー・ホカホカ・タイム☆ to Everyone (23:25) 余白が気になるなら
+        'chartArea': {'width': '95%', 'height': '95%'},
+
     };
 
     var chart = new google.visualization.PieChart(
