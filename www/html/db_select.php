@@ -37,11 +37,11 @@ $hours_total = $total_prepare->fetchAll();
 // 棒グラフ
 // 日毎の勉強時間を　GroupBy　で集計
 $chart_day_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) FROM input_data WHERE `date` LIKE :search GROUP BY `date`'
+    'SELECT `date` , SUM(`hours`) AS h FROM input_data WHERE `date` LIKE :search GROUP BY `date`'
 );
 $chart_day_prepare->execute(['search' => $search]);
-$charts_day = $chart_day_prepare->fetchAll(PDO::FETCH_COLUMN);
-print_r($charts_day);
+$charts_day = $chart_day_prepare->fetchAll();
+// print_r($charts_day);
 
 /*
 $lang_chart = 
@@ -56,9 +56,10 @@ $lang_chart =
 
     // PHPでしか使えない形　→ エンコード　→　JS →　さらに整形
     // PHPである程度整える　→エンコード　もあり
+
 $c = json_encode($charts_day);
 // var_dump($c);
-print_r($c);
+// print_r($c);
 
 
 // foreach ($c_day as $chart_name => $chart_day) {

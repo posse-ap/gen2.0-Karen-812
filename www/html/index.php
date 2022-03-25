@@ -181,14 +181,21 @@ include('db_select.php');
                         }; ?>
 
         // JSで整形！
-            // var obj = { tanuki:'pon-poko', kitsune:'kon-kon', neko:'nyan-nyan' };
             var obj = <?php echo $c; ?>
 
+
+            let a = [];
+            obj.forEach(function (value,index) {
+                let number = Number(value.date.substr(8));
+                let value_number = Number(value.h);
+
+                a.push([number, value_number])
+            });
+
+            console.log(a);
+            data.addRows(a);
+
             /*
-            // しかしこれはエラーです
-            // obj.forEach(function (v,i) {
-            // 処理...
-            // });
             
             // var new_obj =obj.substring(0, 6);
 
@@ -206,15 +213,17 @@ include('db_select.php');
             );
             */
 
+        //     for (const [key, value] of Object.entries(obj)) {
+        //     console.log("[" +  [key] + "," + [value]+ "]");
+        //     const column_data = "[" +  [key] + "," + [value]+ "]";
+        //     a.push([[key] + "," + [value]])
+        //     }
 
+        // // a.map(Number);
+        //     console.log(a);
 
-            for (const [key, value] of Object.entries(obj)) {
-            console.log("[" +  [key] + "," + [value]+ "]");
-            const column_data = "[" +  [key] + "," + [value]+ "]";
-            }
-
-
-
+        /*
+        data.addRows(a);
         data.addRows([
             [1, 3],
             [2, 4],
@@ -246,19 +255,8 @@ include('db_select.php');
             [28, 1],
             [29, 0],
             [30, 0],
-
-            // [{v: [8, 0, 0], f: '8 am'}, 1],
-            // [{v: [9, 0, 0], f: '9 am'}, 2],
-            // [{v: [10, 0, 0], f:'10 am'}, 3],
-            // [{v: [11, 0, 0], f: '11 am'}, 4],
-            // [{v: [12, 0, 0], f: '12 pm'}, 5],
-            // [{v: [13, 0, 0], f: '1 pm'}, 6],
-            // [{v: [14, 0, 0], f: '2 pm'}, 7],
-            // [{v: [15, 0, 0], f: '3 pm'}, 8],
-            // [{v: [16, 0, 0], f: '4 pm'}, 9],
-            // [{v: [17, 0, 0], f: '5 pm'}, 10],
         ]);
-        /**/
+        */
 
     // 🆕
     // var data = new google.visualization.DataTable(<?=$jsonTable?>);　←整形済んだら入れ込む
