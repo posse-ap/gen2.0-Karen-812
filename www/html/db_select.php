@@ -79,11 +79,15 @@ foreach ($hours_by_lang as $hour_by_lang){
 
 // やっぱGROUP BYで集計
 $lang_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) FROM input_data WHERE `date` LIKE :search GROUP BY `languages`'
+    'SELECT `languages` , (100.0 * SUM(`hours`) / (SELECT SUM(`hours`) FROM input_data) ) AS lang_time
+    FROM input_data WHERE `date` LIKE :search 
+    GROUP BY `languages`'
 );
 $lang_prepare->execute(['search' => $search]);
 $hours_by_lang = $lang_prepare->fetchAll();
-// print_r($hours_by_lang);
+print_r($hours_by_lang);
+
+$c2 = json_encode($hours_by_lang);
 
 
 
@@ -92,10 +96,16 @@ $hours_by_lang = $lang_prepare->fetchAll();
 
 // GROUP BY 使って集計
 $cont_prepare = $pdo->prepare(
-    'SELECT SUM(`hours`) FROM input_data  WHERE `date` LIKE :search GROUP BY `contents`'
+    // 'SELECT SUM(`hours`) FROM input_data  WHERE `date` LIKE :search GROUP BY `contents`'
+    'SELECT `contents` , (100.0 * SUM(`hours`) / (SELECT SUM(`hours`) FROM input_data) ) AS cont_time
+    FROM input_data WHERE `date` LIKE :search 
+    GROUP BY `contents`'
 );
 $cont_prepare->execute(['search' => $search]);
 $hours_by_cont = $cont_prepare->fetchAll();
 // print_r($hours_by_cont);
+
+$c3 = json_encode($hours_by_cont);
+
 
 

@@ -19,8 +19,7 @@ include('db_select.php');
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
 
     <!-- font awesome, calender -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -54,7 +53,7 @@ include('db_select.php');
                 <div class="card period">
                     Today
                     <p class="number">
-                        <?php foreach ($hours_par_day as $hour_par_day){
+                        <?php foreach ($hours_par_day as $hour_par_day) {
                             // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
                             echo $hour_par_day['hours'];
                         }; ?>
@@ -65,7 +64,7 @@ include('db_select.php');
                 <div class="card period">
                     Month
                     <p class="number">
-                        <?php foreach ($hours_par_month as $hour_par_month){
+                        <?php foreach ($hours_par_month as $hour_par_month) {
                             echo $hour_par_month['total'];
                         }; ?>
                     </p>
@@ -74,7 +73,7 @@ include('db_select.php');
                 <div class="card period">
                     Total
                     <p class="number">
-                        <?php foreach ($hours_total as $hour_total){
+                        <?php foreach ($hours_total as $hour_total) {
                             echo $hour_total['total2'];
                         }; ?>
                     </p>
@@ -112,106 +111,105 @@ include('db_select.php');
     <?php include('_modal.php'); ?>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 </body>
 
 
-    <!-------------- ここからPhase2 -------------->
+<!-------------- ここからPhase2 -------------->
 
-    <!--Load the Ajax API-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!--Load the Ajax API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
-    <script type="text/javascript">
-
+<script type="text/javascript">
     let calender = document.getElementById("calender");
     let fp = flatpickr(calender, {
-    dateFormat: "Y年n月j日", // フォーマットの変更
+        dateFormat: "Y年n月j日", // フォーマットの変更
     });
 
     function open_modal() {
-    document.getElementById("modal_content").className = "modal_open";
+        document.getElementById("modal_content").className = "modal_open";
     }
 
     function close_modal() {
-    document.getElementById("modal_content").className = "modal_closed";
+        document.getElementById("modal_content").className = "modal_closed";
     }
 
-    function checkcheck(){
-    let check_checkbox = document.getElementsById('checkboxes');
-    if(check_checkbox.checked){
-        check_checkbox.parentNode.style.backgroundColor = '#0467ad';
-        console.log('aaa')
-    }
+    function checkcheck() {
+        let check_checkbox = document.getElementsById('checkboxes');
+        if (check_checkbox.checked) {
+            check_checkbox.parentNode.style.backgroundColor = '#0467ad';
+            console.log('aaa')
+        }
     }
 
-    
+
     function post() {
-    document.getElementById("posted1").className = "after_post2";
-    setTimeout(function(){
-        document.getElementById("posted").className = "after_post";
-        // document.getElementsByClassName('upper_section').className = 'invisible'
-        // document.getElementsByClassName('under_section').className = 'invisible'
-        document.getElementById("modal_inside").className = "hidden";
-        tweet();
-    }, 3000);
-    setTimeout(function(){
-    document.getElementById("posted1").className = "hidden";
-    }, 3000);
+        document.getElementById("posted1").className = "after_post2";
+        setTimeout(function() {
+            document.getElementById("posted").className = "after_post";
+            // document.getElementsByClassName('upper_section').className = 'invisible'
+            // document.getElementsByClassName('under_section').className = 'invisible'
+            document.getElementById("modal_inside").className = "hidden";
+            tweet();
+        }, 3000);
+        setTimeout(function() {
+            document.getElementById("posted1").className = "hidden";
+        }, 3000);
 
     }
-    
+
 
 
     // <!-- 棒グラフ  -->
-        google.charts.load("current", { packages: ["corechart", "bar"] });
-        google.charts.setOnLoadCallback(drawBasic);
+    google.charts.load("current", {
+        packages: ["corechart", "bar"]
+    });
+    google.charts.setOnLoadCallback(drawBasic);
 
-        function drawBasic() {
+    function drawBasic() {
         var data = new google.visualization.DataTable();
         data.addColumn("number", "Day");
         data.addColumn("number", "Time");
 
-        <?php foreach ($hours_par_day as $hour_par_day){
-                            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
-                            echo $hour_par_day['hours'];
-                        }; ?>
+        <?php foreach ($hours_par_day as $hour_par_day) {
+            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
+            echo $hour_par_day['hours'];
+        }; ?>
 
         // JSで整形！
-            var obj = <?php echo $c; ?>
+        var obj = <?php echo $c; ?>
 
 
-            let a = [];
-            obj.forEach(function (value,index) {
-                let number = Number(value.date.substr(8));
-                let value_number = Number(value.h);
+        let a = [];
+        obj.forEach(function(value, index) {
+            let number = Number(value.date.substr(8));
+            let value_number = Number(value.h);
 
-                a.push([number, value_number])
-            });
+            a.push([number, value_number])
+        });
 
-            console.log(a);
-            data.addRows(a);
+        console.log(a);
+        data.addRows(a);
 
-            /*
-            
-            // var new_obj =obj.substring(0, 6);
+        /*
+        
+        // var new_obj =obj.substring(0, 6);
 
-            // こうすればOK
-            // Object.keys(obj).forEach(function (key) {
-            //     console.log([key] + "," + obj[key]);
-            // });
+        // こうすればOK
+        // Object.keys(obj).forEach(function (key) {
+        //     console.log([key] + "," + obj[key]);
+        // });
 
-            for (const [key, value] of Object.entries(obj)) {
-                console.log([value]);
-                }
-            
-            Object.entries(obj).forEach(
-            entry => console.log(entry)  //   1回目: [ "x," 10]                   //   2回目: [ "y" , 20]
-            );
-            */
+        for (const [key, value] of Object.entries(obj)) {
+            console.log([value]);
+            }
+        
+        Object.entries(obj).forEach(
+        entry => console.log(entry)  //   1回目: [ "x," 10]                   //   2回目: [ "y" , 20]
+        );
+        */
 
         //     for (const [key, value] of Object.entries(obj)) {
         //     console.log("[" +  [key] + "," + [value]+ "]");
@@ -222,78 +220,46 @@ include('db_select.php');
         // // a.map(Number);
         //     console.log(a);
 
-        /*
-        data.addRows(a);
-        data.addRows([
-            [1, 3],
-            [2, 4],
-            [3, 5],
-            [4, 3],
-            [5, 0],
-            [6, 0],
-            [7, 4],
-            [8, 2],
-            [9, 2],
-            [10, 8],
-            [11, 8],
-            [12, 2],
-            [13, 2],
-            [14, 1],
-            [15, 7],
-            [16, 4],
-            [17, 4],
-            [18, 3],
-            [19, 3],
-            [20, 3],
-            [21, 2],
-            [22, 2],
-            [23, 6],
-            [24, 2],
-            [25, 2],
-            [26, 1],
-            [27, 1],
-            [28, 1],
-            [29, 0],
-            [30, 0],
-        ]);
-        */
-
-    // 🆕
-    // var data = new google.visualization.DataTable(<?=$jsonTable?>);　←整形済んだら入れ込む
+        // 🆕
+        // var data = new google.visualization.DataTable(<?= $jsonTable ?>);　←整形済んだら入れ込む
 
         var options = {
             title: "",
 
             // X軸
             hAxis: {
-            title: "",
-            format: "",
-            viewWindow: {
-                min: [7, 30, 0],
-                max: [17, 30, 0],
-            },
-            gridlines: { color: "none" },
-            ticks:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
+                title: "",
+                format: "",
+                viewWindow: {
+                    min: [7, 30, 0],
+                    max: [17, 30, 0],
+                },
+                gridlines: {
+                    color: "none"
+                },
+                ticks: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
             },
 
             legend: {
-            position: "none",
+                position: "none",
             },
 
             // Y軸
             vAxis: {
-            title: '',
-            format: "#.#h",
-            gridlines: { color: "none" },
-            ticks:[0,2,4,6,8]
+                title: '',
+                format: "#.#h",
+                gridlines: {
+                    color: "none"
+                },
+                ticks: [0, 2, 4, 6, 8]
             },
         };
         var chart = new google.visualization.ColumnChart(
             document.getElementById("columnchart")
-            );
-            
+        );
+
         chart.draw(data, options);
-        }
+    }
 
 
     // ドーナツグラフ 言語
@@ -302,96 +268,159 @@ include('db_select.php');
     // Google Chartのpackages(['corechart')を指定
     // 参考：https://uxbear.me/googlechart-color/
 
-    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
     // ロード時のコールバックを"drawChart"に指定
     google.charts.setOnLoadCallback(drawChart);
 
+
     function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ["laguage", "portion"],
-        ["HTML", 30],
-        ["CSS", 20],
-        ["JavaScript", 10],
-        ["PHP", 5],
-        ["Laravel", 5],
-        ["SQL", 20],
-        ["SHELL", 20],
-        ["その他", 10],
-    ]);
 
-    var options = {
-        title: "",
-        pieHole: 0.4,
-        // width: 300,
-        // height: 300,
-        colors: [
-        "#0345EC",
-        "#0F71BD",
-        "#20BDDE",
-        "#3CCEFE",
-        "#B29EF3",
-        "#6D46EC",
-        "#4A17EF",
-        "#3105C0",
-        ],
-        chartArea: {
-        // leave room for y-axis labels
-        // https://stackoverflow.com/questions/41771333/sizing-google-charts-to-fill-div-width-and-height/41771608
-        width: "98%",
-        },
-        'chartArea': {'width': '95%', 'height': '95%'},
-        legend: { position: "bottom" },
-    };
+        // ([
+        //     ["language", "portion"],
+        // ]);
 
-    var chart = new google.visualization.PieChart(
-        document.getElementById("donutchart")
-    );
-    chart.draw(data, options);
+
+        // JSで整形！
+        var obj = <?php echo $c2; ?>;
+        let b = [];
+        b.push(
+            ["language", "portion"]
+        );
+
+        obj.forEach(function(value, index) {
+            let lang_number = value.languages.toString();
+            let time_number = Math.floor(value.lang_time);
+            // let time_number = Number(value.lang_time);
+
+            b.push([lang_number, time_number]);
+        });
+
+        console.log([b]);
+        // data.addRows([b]);
+        var data = new google.visualization.arrayToDataTable(b);
+
+        /*
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ["laguage", "portion"],
+                ["HTML", 30],
+                ["CSS", 20],
+                ["JavaScript", 10],
+                ["PHP", 5],
+                ["Laravel", 5],
+                ["SQL", 20],
+                ["SHELL", 20],
+                ["その他", 10],
+            ]);
+        */
+        var options = {
+            title: "",
+            pieHole: 0.4,
+            // width: 300,
+            // height: 300,
+            colors: [
+                "#0345EC",
+                "#0F71BD",
+                "#20BDDE",
+                "#3CCEFE",
+                "#B29EF3",
+                "#6D46EC",
+                "#4A17EF",
+                "#3105C0",
+            ],
+            chartArea: {
+                // leave room for y-axis labels
+                // https://stackoverflow.com/questions/41771333/sizing-google-charts-to-fill-div-width-and-height/41771608
+                width: "98%",
+            },
+            'chartArea': {
+                'width': '95%',
+                'height': '95%'
+            },
+            legend: {
+                position: "bottom"
+            },
+        };
+
+        var chart = new google.visualization.PieChart(
+            document.getElementById("donutchart")
+        );
+        chart.draw(data, options);
     }
 
     // ドーナツグラフ 学習内容
-    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
     google.charts.setOnLoadCallback(drawChart2);
+
     function drawChart2() {
-    var data = google.visualization.arrayToDataTable([
-        ["content", "portion"],
-        ["N予備校", 40],
-        ["ドットインストール", 20],
-        ["課題", 40],
-    ]);
+        // JSで整形！
+        var obj = <?php echo $c3; ?>;
+        let c = [];
+        c.push(
+            ["content", "portion"]
+        );
 
-    var options = {
-        title: "",
-        pieHole: 0.4,
-        // width: 300,
-        // height: 300,
-        colors: ["#0345EC", "#0F71BD", "#20BDDE"],
-        legend: { position: "bottom" },
-        // スーパー・ホカホカ・タイム☆ to Everyone (23:25) 余白が気になるなら
-        'chartArea': {'width': '95%', 'height': '95%'},
+        obj.forEach(function(value, index) {
+            let cont_number = value.contents.toString();
+            let time_number = Math.floor(value.cont_time);
+            // let time_number = Number(value.lang_time);
 
-    };
+            c.push([cont_number, time_number]);
+        });
 
-    var chart = new google.visualization.PieChart(
-        document.getElementById("donutchart2")
-    );
-    chart.draw(data, options);
+        console.log([c]);
+        // data.addRows([b]);
+        var data = new google.visualization.arrayToDataTable(c);
+
+
+        // var data = google.visualization.arrayToDataTable([
+        //     ["content", "portion"],
+        //     ["N予備校", 40],
+        //     ["ドットインストール", 20],
+        //     ["課題", 40],
+        // ]);
+
+        var options = {
+            title: "",
+            pieHole: 0.4,
+            // width: 300,
+            // height: 300,
+            colors: ["#0345EC", "#0F71BD", "#20BDDE"],
+            legend: {
+                position: "bottom"
+            },
+            // スーパー・ホカホカ・タイム☆ to Everyone (23:25) 余白が気になるなら
+            'chartArea': {
+                'width': '95%',
+                'height': '95%'
+            },
+
+        };
+
+        var chart = new google.visualization.PieChart(
+            document.getElementById("donutchart2")
+        );
+        chart.draw(data, options);
     }
 
-    window.onresize = function () {
-    drawBasic();
-    drawChart();
-    drawChart2();
+    window.onresize = function() {
+        drawBasic();
+        drawChart();
+        drawChart2();
     };
 
     let tweet_content = document.getElementById('tweet');
 
-    function tweet(){
-    let twitter_text = document.getElementById('twitter_com').value
-    if(tweet_content.checked){
-        window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
-    }
+    function tweet() {
+        let twitter_text = document.getElementById('twitter_com').value
+        if (tweet_content.checked) {
+            window.open("https://twitter.com/intent/tweet?text=" + twitter_text);
+        }
     };
-        </script>
+</script>
 
 </html>
