@@ -1,11 +1,9 @@
 <?php
-
-$dsn = 'mysql:dbname=webapp_db;charset=utf8;host=mysql';
+$dsn = 'mysql:dbname=webapp_db;charset=utf8;host=db';
 $user = 'karen';
 $password = 'password';
 
 try {
-
     // PDOStatementクラスのインスタンスを生成します。
     $pdo = new PDO(
         $dsn,
@@ -17,26 +15,13 @@ try {
             // (PDO::FETCH_ASSOC);
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            // にすることでエラーが吐かれるようにしましたか？ https://www.php.net/manual/ja/pdo.error-handling.php
         ]
     );
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "接続成功";
-
-    // $sql = 'SELECT * FROM big_questions';
-
-    // PDOStatementクラスのインスタンスを生成します。
-    // $prepare = $dbh->prepare($sql);
-
-    // プリペアドステートメントを実行する
-    // $prepare->execute();
-    
-    // $result = $prepare->fetchAll();
-    // PDO::FETCH_ASSOCは、対応するカラム名にふられているものと同じキーを付けた 連想配列として取得します。
-    // (PDO::FETCH_ASSOC);
-    
-    // 結果を出力
-    // print_r($result);
-
+    // echo "接続成功";
 } catch (PDOException $e) {
     echo "接続失敗: " . $e->getMessage() . "\n";
     exit();
