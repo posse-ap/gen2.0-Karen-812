@@ -74,9 +74,26 @@ $lang_prepare = $pdo->prepare(
 );
 $lang_prepare->execute(['search' => $search]);
 $hours_by_lang = $lang_prepare->fetchAll();
-print_r($hours_by_lang);
+// print_r($hours_by_lang);
 
 $c2 = json_encode($hours_by_lang);
+
+
+// IDと学習言語名紐付け
+$test_prepare = $pdo->prepare(
+    'SELECT language_num.language, (100.0 * SUM(`hours`) / (SELECT SUM(`hours`) FROM input_data) ) AS lang_time
+    FROM input_data 
+    -- AS test_time
+    INNER JOIN language_num
+    ON
+    input_data.languages = language_num.id
+    WHERE `date` LIKE :search 
+    GROUP BY `languages`;'
+);
+$test_prepare->execute(['search' => $search]);
+$hours_by_test = $test_prepare->fetchAll();
+
+$c4 = json_encode($hours_by_test);
 
 
 
@@ -100,6 +117,21 @@ $cont_prepare->execute(['search' => $search]);
 $hours_by_cont = $cont_prepare->fetchAll();
 
 $c3 = json_encode($hours_by_cont);
+
+// IDと学習言語名紐付け
+$test_prepare = $pdo->prepare(
+    'SELECT content_num.content, (100.0 * SUM(`hours`) / (SELECT SUM(`hours`) FROM input_data) ) AS cont_time
+    FROM input_data
+    INNER JOIN content_num
+    ON
+    input_data.contents = content_num.id
+    WHERE `date` LIKE :search 
+    GROUP BY `contents`;'
+);
+$test_prepare->execute(['search' => $search]);
+$hours_by_test2 = $test_prepare->fetchAll();
+
+$c5 = json_encode($hours_by_test2);
 
 
 

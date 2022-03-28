@@ -239,7 +239,7 @@ include('db_select.php');
     function drawChart() {
 
         // JSで整形！
-        var obj = <?php echo $c2; ?>;
+        var obj = <?php echo $c4; ?>;
 
         let b = [];
         b.push(
@@ -247,7 +247,8 @@ include('db_select.php');
         );
 
         obj.forEach(function(value, index) {
-            let lang_number = value.languages.toString();
+            // let lang_number = value.languages.toString();
+            let lang_number = value.language;
             let time_number = Math.floor(value.lang_time);
             b.push([lang_number, time_number]);
         });
@@ -300,7 +301,7 @@ include('db_select.php');
 
     function drawChart2() {
         // JSで整形！
-        var obj = <?php echo $c3; ?>;
+        var obj = <?php echo $c5; ?>;
 
         let c = [];
         c.push(
@@ -308,7 +309,8 @@ include('db_select.php');
         );
 
         obj.forEach(function(value, index) {
-            let cont_number = value.contents.toString();
+            // let cont_number = value.contents.toString();
+            let cont_number = value.content;
             let time_number = Math.floor(value.cont_time);
             c.push([cont_number, time_number]);
         });

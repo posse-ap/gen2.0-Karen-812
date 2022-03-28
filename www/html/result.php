@@ -3,7 +3,8 @@
 require('function.php');
 
 // POSTされたのを受け取る
-$filename = 'init.sql';  // できない！涙 = '../../mysql/sql/init.sql';
+$filename = 'init.sql';  
+// できない涙 = '../../mysql/sql/init.sql';
 $message1 = trim(filter_input(INPUT_POST, 'contents'));
 $day = trim(filter_input(INPUT_POST, 'date'));
 $message = $message !== '' ? $message : '...';
