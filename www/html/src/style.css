@@ -120,6 +120,7 @@ body {
     margin: 0;
   }
   .graph {
+    box-sizing: border-box;
     width: 100%;
   }
   .title {

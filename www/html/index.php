@@ -3,8 +3,6 @@ require('dbconnect.php');
 require('function.php');
 
 include('db_select.php');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -54,13 +52,12 @@ include('db_select.php');
                     Today
                     <p class="number">
                         <?php foreach ($hours_par_day as $hour_par_day) {
-                            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
                             echo $hour_par_day['hours'];
                         }; ?>
                     </p>
-
                     <p class="unit">hour</p>
                 </div>
+
                 <div class="card period">
                     Month
                     <p class="number">
@@ -70,6 +67,7 @@ include('db_select.php');
                     </p>
                     <p class="unit">hour</p>
                 </div>
+
                 <div class="card period">
                     Total
                     <p class="number">
@@ -80,13 +78,16 @@ include('db_select.php');
                     <p class="unit">hour</p>
                 </div>
             </section>
+            <!-- 棒グラフ -->
             <section class="first_bottom">
                 <div class="card graph">
                     <div id="columnchart" style="width: 100%;"></div>
                 </div>
             </section>
         </section>
+
         <section class="second_section">
+            <!-- 円グラフ -->
             <div class="card title">学習時間
                 <div id="donutchart" style="width: 100%;"></div>
             </div>
@@ -140,10 +141,9 @@ include('db_select.php');
         let check_checkbox = document.getElementsById('checkboxes');
         if (check_checkbox.checked) {
             check_checkbox.parentNode.style.backgroundColor = '#0467ad';
-            console.log('aaa')
+            // console.log('aaa')
         }
     }
-
 
     function post() {
         document.getElementById("posted1").className = "after_post2";
@@ -160,8 +160,6 @@ include('db_select.php');
 
     }
 
-
-
     // <!-- 棒グラフ  -->
     google.charts.load("current", {
         packages: ["corechart", "bar"]
@@ -173,55 +171,18 @@ include('db_select.php');
         data.addColumn("number", "Day");
         data.addColumn("number", "Time");
 
-        <?php foreach ($hours_par_day as $hour_par_day) {
-            // echo $result[`hours`]; 普通の''にしたらいけた。。。笑
-            echo $hour_par_day['hours'];
-        }; ?>
-
         // JSで整形！
         var obj = <?php echo $c; ?>
-
 
         let a = [];
         obj.forEach(function(value, index) {
             let number = Number(value.date.substr(8));
             let value_number = Number(value.h);
-
             a.push([number, value_number])
         });
 
         console.log(a);
         data.addRows(a);
-
-        /*
-        
-        // var new_obj =obj.substring(0, 6);
-
-        // こうすればOK
-        // Object.keys(obj).forEach(function (key) {
-        //     console.log([key] + "," + obj[key]);
-        // });
-
-        for (const [key, value] of Object.entries(obj)) {
-            console.log([value]);
-            }
-        
-        Object.entries(obj).forEach(
-        entry => console.log(entry)  //   1回目: [ "x," 10]                   //   2回目: [ "y" , 20]
-        );
-        */
-
-        //     for (const [key, value] of Object.entries(obj)) {
-        //     console.log("[" +  [key] + "," + [value]+ "]");
-        //     const column_data = "[" +  [key] + "," + [value]+ "]";
-        //     a.push([[key] + "," + [value]])
-        //     }
-
-        // // a.map(Number);
-        //     console.log(a);
-
-        // 🆕
-        // var data = new google.visualization.DataTable(<?= $jsonTable ?>);　←整形済んだら入れ込む
 
         var options = {
             title: "",
@@ -262,7 +223,7 @@ include('db_select.php');
     }
 
 
-    // ドーナツグラフ 言語
+    // <!-- ドーナツグラフ 言語 -->
 
     // Visualization APIと、corechartパッケージをロードする
     // Google Chartのpackages(['corechart')を指定
@@ -277,44 +238,25 @@ include('db_select.php');
 
     function drawChart() {
 
-        // ([
-        //     ["language", "portion"],
-        // ]);
-
-
         // JSで整形！
-        var obj = <?php echo $c2; ?>;
+        var obj = <?php echo $c4; ?>;
+
         let b = [];
         b.push(
             ["language", "portion"]
         );
 
         obj.forEach(function(value, index) {
-            let lang_number = value.languages.toString();
+            // let lang_number = value.languages.toString();
+            let lang_number = value.language;
             let time_number = Math.floor(value.lang_time);
-            // let time_number = Number(value.lang_time);
-
             b.push([lang_number, time_number]);
         });
 
         console.log([b]);
-        // data.addRows([b]);
+        // data.addRows([b]); arrayToDataTable と DataTableの違い
         var data = new google.visualization.arrayToDataTable(b);
 
-        /*
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ["laguage", "portion"],
-                ["HTML", 30],
-                ["CSS", 20],
-                ["JavaScript", 10],
-                ["PHP", 5],
-                ["Laravel", 5],
-                ["SQL", 20],
-                ["SHELL", 20],
-                ["その他", 10],
-            ]);
-        */
         var options = {
             title: "",
             pieHole: 0.4,
@@ -350,7 +292,8 @@ include('db_select.php');
         chart.draw(data, options);
     }
 
-    // ドーナツグラフ 学習内容
+
+    // <!-- ドーナツグラフ 言語 -->
     google.charts.load("current", {
         packages: ["corechart"]
     });
@@ -358,31 +301,22 @@ include('db_select.php');
 
     function drawChart2() {
         // JSで整形！
-        var obj = <?php echo $c3; ?>;
+        var obj = <?php echo $c5; ?>;
+
         let c = [];
         c.push(
             ["content", "portion"]
         );
 
         obj.forEach(function(value, index) {
-            let cont_number = value.contents.toString();
+            // let cont_number = value.contents.toString();
+            let cont_number = value.content;
             let time_number = Math.floor(value.cont_time);
-            // let time_number = Number(value.lang_time);
-
             c.push([cont_number, time_number]);
         });
 
         console.log([c]);
-        // data.addRows([b]);
         var data = new google.visualization.arrayToDataTable(c);
-
-
-        // var data = google.visualization.arrayToDataTable([
-        //     ["content", "portion"],
-        //     ["N予備校", 40],
-        //     ["ドットインストール", 20],
-        //     ["課題", 40],
-        // ]);
 
         var options = {
             title: "",
@@ -398,7 +332,6 @@ include('db_select.php');
                 'width': '95%',
                 'height': '95%'
             },
-
         };
 
         var chart = new google.visualization.PieChart(
