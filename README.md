@@ -1,4 +1,4 @@
-# phase3 Quizy sample code
+# PH4の課題で　phase3 Quizy sample code を編集
 
 ## setup
 
